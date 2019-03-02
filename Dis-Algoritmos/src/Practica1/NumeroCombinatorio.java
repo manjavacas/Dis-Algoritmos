@@ -59,11 +59,11 @@ public class NumeroCombinatorio {
 	}
 
 	private static int combinatorio(Stack<Integer> pilaN, Stack<Integer> pilaK, Stack<Integer> pilaL,
-			Stack<Integer> pilaRes) {
+			Stack<Integer> pilaSol) {
 
-		int sol = -1;
-		while (!pilaN.empty() || !pilaK.empty()) {
-			while (pilaN.peek() > 0 && pilaK.peek() > 0) {
+		int sol = 0;
+		while (!pilaN.empty() && !pilaK.empty()) {
+			while (pilaN.peek() > 0 && pilaK.peek() > 0 && pilaL.peek() <= 2) {
 				switch (pilaL.peek()) {
 				// Primera llamada
 				case 1:
@@ -77,31 +77,29 @@ public class NumeroCombinatorio {
 					break;
 				}
 				pilaL.push(1);
-				
+
+				// Caso base
 				if (pilaN.peek() == 0) {
-					pilaRes.push(1);
-				} else if (pilaK.peek() == 0) {
-					pilaRes.push(0);
+					pilaSol.push(1);
 				} else {
-					pilaRes.push(0);
+					pilaSol.push(0);
 				}
 			}
 
+			// Retornos
 			pilaN.pop();
+			pilaK.pop();
 			pilaL.pop();
-			sol = pilaRes.pop();
+			sol = pilaSol.pop();
 
-			if (!pilaN.empty()) {
+			// Siguiente llamada e incremento de la solucion
+			if (!pilaN.empty() && !pilaK.empty()) {
 				pilaL.push(pilaL.pop() + 1);
-				pilaRes.push(pilaRes.pop() + sol);
+				pilaSol.push(pilaSol.pop() + sol);
 			}
-
-			if (sol == 0)
-				sol = 1;
-			return sol;
 		}
 
-		return 0;
+		return sol;
 	}
 
 }
