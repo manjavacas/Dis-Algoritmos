@@ -1,17 +1,43 @@
 package Practica1;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class NumeroCombinatorio {
 
 	public static void main(String[] args) {
 
-		// Debe cumplirse que n >= k
-		int n = 6, k = 2;
+		int res = -1, n, k;
+		long t0 = -1, t1 = -1;
 
-		System.out.println(combinatorioIterativo(n, k));
-		System.out.println(combinatorioRecursivo(n, k));
-		System.out.println(combinatorioPila(n, k));
+		Scanner leer = new Scanner(System.in);
+		System.out.println("Introducir valor de n: ");
+		n = leer.nextInt();
+		System.out.println("Introducir valor de k: ");
+		k = leer.nextInt();
+		leer.close();
+
+		if (n >= k) {
+			// Combinatorio iterativo
+			t0 = System.nanoTime();
+			res = combinatorioIterativo(n, k);
+			t1 = System.nanoTime();
+			System.out.println("* Combinatorio iterativo = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+
+			// Combinatorio recursivo
+			t0 = System.nanoTime();
+			res = combinatorioRecursivo(n, k);
+			t1 = System.nanoTime();
+			System.out.println("* Combinatorio recursivo = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+
+			// Combinatorio con pilas
+			t0 = System.nanoTime();
+			res = combinatorioPilas(n, k);
+			t1 = System.nanoTime();
+			System.out.println("* Combinatorio con pilas = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+		} else {
+			System.out.println("n debe ser mayor o igual que k");
+		}
 	}
 
 	// Calcular factorial de un numero
@@ -30,21 +56,17 @@ public class NumeroCombinatorio {
 
 	// Calcular numero combinatorio de forma recursiva
 	private static int combinatorioRecursivo(int n, int k) {
-		return combinatorio(n, k);
-	}
-
-	private static int combinatorio(int n, int k) {
 		if (k == 0) {
 			return 1;
 		} else if (n == 0) {
 			return 0;
 		} else {
-			return combinatorio(n - 1, k - 1) + combinatorio(n - 1, k);
+			return combinatorioRecursivo(n - 1, k - 1) + combinatorioRecursivo(n - 1, k);
 		}
 	}
 
 	// Calcular numero combinatorio mediante pilas
-	private static int combinatorioPila(int n, int k) {
+	private static int combinatorioPilas(int n, int k) {
 		Stack<Integer> pilaN = new Stack<Integer>();
 		Stack<Integer> pilaK = new Stack<Integer>();
 		Stack<Integer> pilaL = new Stack<Integer>();
@@ -55,10 +77,10 @@ public class NumeroCombinatorio {
 		pilaL.push(1);
 		pilaSol.push(0);
 
-		return combinatorio(pilaN, pilaK, pilaL, pilaSol);
+		return combinatorioPilas(pilaN, pilaK, pilaL, pilaSol);
 	}
 
-	private static int combinatorio(Stack<Integer> pilaN, Stack<Integer> pilaK, Stack<Integer> pilaL,
+	private static int combinatorioPilas(Stack<Integer> pilaN, Stack<Integer> pilaK, Stack<Integer> pilaL,
 			Stack<Integer> pilaSol) {
 
 		int sol = 0;
@@ -79,7 +101,7 @@ public class NumeroCombinatorio {
 				pilaL.push(1);
 
 				// Caso base
-				if (pilaN.peek() == 0) {
+				if (pilaK.peek() == 0) {
 					pilaSol.push(1);
 				} else {
 					pilaSol.push(0);
