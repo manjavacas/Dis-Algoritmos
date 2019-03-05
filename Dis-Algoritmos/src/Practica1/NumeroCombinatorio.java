@@ -22,19 +22,22 @@ public class NumeroCombinatorio {
 			t0 = System.nanoTime();
 			res = combinatorioIterativo(n, k);
 			t1 = System.nanoTime();
-			System.out.println("* Combinatorio iterativo = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+			System.out.println(
+					"* Combinatorio iterativo (" + n + "," + k + ") = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
 
 			// Combinatorio recursivo
 			t0 = System.nanoTime();
 			res = combinatorioRecursivo(n, k);
 			t1 = System.nanoTime();
-			System.out.println("* Combinatorio recursivo = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+			System.out.println(
+					"* Combinatorio recursivo (" + n + "," + k + ") = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
 
 			// Combinatorio con pilas
 			t0 = System.nanoTime();
 			res = combinatorioPilas(n, k);
 			t1 = System.nanoTime();
-			System.out.println("* Combinatorio con pilas = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
+			System.out.println(
+					"* Combinatorio con pilas (" + n + "," + k + ") = " + res + ".\tTiempo: " + (t1 - t0) + " ns.");
 		} else {
 			System.out.println("n debe ser mayor o igual que k");
 		}
@@ -120,6 +123,10 @@ public class NumeroCombinatorio {
 				pilaSol.push(pilaSol.pop() + sol);
 			}
 		}
+
+		// Solucion para k = 0
+		if (sol == 0)
+			sol = 1;
 
 		return sol;
 	}
