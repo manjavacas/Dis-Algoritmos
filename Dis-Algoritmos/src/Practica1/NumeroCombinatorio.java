@@ -1,5 +1,36 @@
 package Practica1;
 
+/** 
+ * 
+ * ********************************* COMBINATORIO ITERATIVO ********************************
+ * 
+ * 		La complejidad viene dada por el calculo del factorial
+ * 		Sea la complejidad de factorial(n):
+ * 			| T(n) = 1, si n <= 1
+ * 			| T(n) = T(n-1) + 1, si n > 1
+ * 		Por expansion de recurrencia: 
+ * 			| T(n) = 1 + T(n-1) = 1 + 1 + T(n-2) = ... = k + T(n-k) si n > k
+ * 		Para k = n - 1 tenemos: 
+ * 			| T(n) = n-1 + T(n-n+1) = n-1 + T(1) = n
+ * 		Por tanto:
+ * 			| T(n,k) = T(n) + T(k) + T(n-k) + c <=> 3*T(n) + c = 3n + c € O(n)
+ *
+ * ********************************* COMBINATORIO RECURSIVO ********************************
+ * 		
+ * 		Sea la complejidad del algoritmo recursivo:
+ * 			| T(n) = 2*T(n-1), si n > o
+ * 			| T(n) = 1, si n = 0
+ * 		Por expansion de recurrencia:
+ * 			| T(n) = 2 * T(n-1) + 1 = 2 * (2*T(n-2) + 1) + 1 = ... = 2^k * T(n-k) + (2^k-1)
+ * 		Para k = n - 1 tenemos:
+ * 			| T(n) = 2^(n-1) * T(1) + 2^(n-1) - 1 € O(2^n)
+ * 			 
+ * ********************************* COMBINATORIO CON PILAS ********************************
+ * 
+ * 		Se estima una complejidad completamente intratable.
+ * 
+ * **/
+
 import java.util.Scanner;
 import java.util.Stack;
 
