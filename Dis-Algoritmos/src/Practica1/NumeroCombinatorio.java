@@ -1,6 +1,7 @@
 package Practica1;
 
 /** 
+ * @author Antonio Manjavacas, Ruben Marquez
  * 
  * ********************************* COMBINATORIO ITERATIVO ********************************
  * 
