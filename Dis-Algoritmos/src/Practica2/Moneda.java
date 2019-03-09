@@ -3,8 +3,7 @@ package Practica2;
 public class Moneda {
 
 	private int valor;
-	private int cantidad;
-
+	
 	public Moneda(int valor) {
 		this.valor = valor;
 	}

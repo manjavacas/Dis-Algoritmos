@@ -36,7 +36,7 @@ public class CambioMonedas {
 
 		// Version forward
 		solucion = forward(cambio, monedas);
-		System.out.println(solucion.get(solucion.size() - 1));
+		
 	}
 
 	// Version forward con lista de adyacentes
