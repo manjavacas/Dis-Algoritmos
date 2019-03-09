@@ -1,5 +1,5 @@
 # Dis-Algoritmos
-Prácticas para la asignatura Diseño de Algoritmos. 
+Prácticas de la asignatura Diseño de Algoritmos. 
 Curso 2018/2019.
 
 - Antonio Manjavacas Lucas
