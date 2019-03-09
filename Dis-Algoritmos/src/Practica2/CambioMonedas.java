@@ -34,6 +34,7 @@ public class CambioMonedas {
 
 		System.out.println("\nIntroducido cambio = " + cambio + " y monedas (valor, cantidad) = " + monedas + "\n");
 
+		// Version forward
 		solucion = forward(cambio, monedas);
 		System.out.println(solucion.get(solucion.size() - 1));
 	}
