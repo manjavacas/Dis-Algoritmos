@@ -1,7 +1,6 @@
 package Practica2;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Antonio Manjavacas, Ruben Marquez
@@ -19,74 +18,89 @@ import java.util.Scanner;
 
 public class CambioMonedas {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 
-		ArrayList<Moneda> solucion = new ArrayList<Moneda>();
-		ArrayList<Moneda> actual = new ArrayList<Moneda>();
 		ArrayList<Moneda> monedas = new ArrayList<Moneda>();
+		ArrayList<Cambio> solucion = new ArrayList<Cambio>();
 
-		// Lectura de datos
-		Scanner leer = new Scanner(System.in);
+		// Datos de entrada
+		int cambio = 12;
+		monedas.add(new Moneda(1));
+		monedas.add(new Moneda(1));
+		monedas.add(new Moneda(2));
+		monedas.add(new Moneda(4));
+		monedas.add(new Moneda(6));
+		monedas.add(new Moneda(6));
 
-		System.out.println("Introducir cambio a devolver: ");
-		int cambio = leer.nextInt();
+		System.out.println("\nIntroducido cambio = " + cambio + " y monedas (valor, cantidad) = " + monedas + "\n");
 
-		System.out.println("Introducir valores de monedas (separados por comas):");
-		String valores = leer.next();
-		leer.close();
-
-		String[] tokens = valores.split(",");
-		for (int n = 0; n < tokens.length; n++) {
-			monedas.add(new Moneda(Integer.parseInt(tokens[n])));
-		}
-
-		System.out.println("\nIntroducido cambio = " + cambio + " y monedas = " + monedas + "\n");
-
-		// Mostrar solucion
-		solucion = backtrackingCambio(cambio, monedas, solucion, actual);
-		System.out.println("\nMejor solucion: " + solucion);
+		solucion = forward(cambio, monedas);
+		System.out.println(solucion.get(solucion.size() - 1));
 	}
 
-	// Solucion backtracking al problema
-	private static ArrayList<Moneda> backtrackingCambio(int cambio, ArrayList<Moneda> monedas,
-			ArrayList<Moneda> solucion, ArrayList<Moneda> actual) {
+	// Version forward con lista de adyacentes
+	private static ArrayList<Cambio> forward(int cambio, ArrayList<Moneda> monedas) {
 
-		Moneda m = null;
-		if (esSolucion(actual, cambio) && esMejor(actual, solucion)) {
-			solucion = new ArrayList<Moneda>(actual);
-			System.out.println("Solucion: " + solucion);
-		} else {
-			for (int i = 0; i < monedas.size(); i++) {
-				m = monedas.get(i);
-				if (suma(actual) + m.getValor() <= cambio) {
-					actual.add(m);
-					solucion = backtrackingCambio(cambio, monedas, solucion, actual);
-					actual.remove(m);
+		ArrayList<Cambio> cambios = new ArrayList<Cambio>();
+		cambios.add(new Cambio(null));
+
+		int pos = 0;
+
+		while (pos < cambios.size()) {
+
+			// Obtener cambio y generar sus adyacentes
+			Cambio actual = cambios.get(pos);
+			ArrayList<Cambio> adyacentes = getAdyacentes(actual, cambio, monedas);
+
+			// Para cada adyacente, comprobar si ya ha sido creado
+			for (int i = 0; i < adyacentes.size(); i++) {
+				Cambio nuevo = adyacentes.get(i);
+				
+				// Si no ha sido creado, se incluye en la lista
+				if (!cambios.contains(nuevo)) {
+					cambios.add(nuevo);
+					// Si ha sido creado, se comprueba si es mejor
+				} else {
+					Cambio previo = cambios.get(cambios.indexOf(nuevo));
+					// Si es mejor, se actualiza el previo
+					if (esMejor(nuevo, previo)) {
+						previo.setMonedas(nuevo.getMonedas());
+						previo.setVieneDe(nuevo.getVieneDe());
+					}
 				}
 			}
+
+			pos++;
 		}
-		return solucion;
+
+		return cambios;
+
 	}
 
-	// Devuelve la suma de los valores de una lista de monedas
-	private static int suma(ArrayList<Moneda> monedas) {
-		int suma = 0;
+	// Devuelve los cambios posibles a partir de un cambio dado
+	private static ArrayList<Cambio> getAdyacentes(Cambio actual, int cambio, ArrayList<Moneda> monedas) {
+
+		ArrayList<Cambio> adyacentes = new ArrayList<Cambio>();
+
 		for (int i = 0; i < monedas.size(); i++) {
-			suma += monedas.get(i).getValor();
+			Moneda m = monedas.get(i);
+			// Si lo acumulado mas la moneda no excede el cambio
+			if (actual.getAcumulado() + m.getValor() <= cambio) {
+				// Se crea el adyacente y se incluye en la lista
+				Cambio nuevo = new Cambio(actual);
+				nuevo.getMonedas().addAll(actual.getMonedas());
+				nuevo.getMonedas().add(m);
+				adyacentes.add(nuevo);
+			}
+
 		}
-		return suma;
+		return adyacentes;
 	}
 
-	// Comprueba si una lista de monedas es solucion
-	private static boolean esSolucion(ArrayList<Moneda> monedas, int max) {
-		return suma(monedas) == max;
-	}
-
-	// Comprueba si la solucion s1 es mejor que la solucion s2
-	private static boolean esMejor(ArrayList<Moneda> s1, ArrayList<Moneda> s2) {
-		// Una solucion es mejor que otra si emplea un menor numero de monedas
-		// El primer caso siempre es mejor --> s2.size == 0
-		return s1.size() < s2.size() || s2.size() == 0;
+	// Comprueba si el cambio c1 es mejor que el cambio c2
+	private static boolean esMejor(Cambio c1, Cambio c2) {
+		// Un cambio es mejor que otro si emplea un menor numero de monedas
+		return c1.getMonedas().size() < c2.getMonedas().size();
 	}
 
 }
