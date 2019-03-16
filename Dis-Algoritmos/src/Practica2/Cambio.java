@@ -41,11 +41,17 @@ public class Cambio {
 	@Override
 	public String toString() {
 		if (vieneDe == null) {
-			return "Cambio [monedas=" + monedas + ", vieneDe=[], acumulado=" + getAcumulado() + "]";
+			return "Cambio [monedas=" + monedas + ", vieneDe=null, acumulado=" + getAcumulado() + "]";
 		} else {
 			return "Cambio [monedas=" + monedas + ", vieneDe=" + vieneDe.getMonedas() + ", acumulado=" + getAcumulado()
 					+ "]";
 		}
+	}
+
+	@Override
+	// Dos cambios son iguales si acumulan el mismo valor
+	public boolean equals(Object cambio) {
+		return (cambio instanceof Cambio) && this.getAcumulado() == ((Cambio) cambio).getAcumulado();
 	}
 
 }

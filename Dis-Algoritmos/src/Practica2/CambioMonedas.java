@@ -11,6 +11,9 @@ import java.util.ArrayList;
  *         numero de monedas posible. En caso de no ser posible, devolver la
  *         mayor cantidad sin pasarse.
  *
+ *
+ *         (SE ASUME UN NUMERO ILIMITADO DE MONEDAS)
+ *
  *         Representar el grafo multietapico empleado y realizar implementacion
  *         backward, forward y matricial.
  *
@@ -24,12 +27,10 @@ public class CambioMonedas {
 		ArrayList<Cambio> solucion = new ArrayList<Cambio>();
 
 		// Datos de entrada
-		int cambio = 12;
-		monedas.add(new Moneda(1));
+		int cambio = 13;
 		monedas.add(new Moneda(1));
 		monedas.add(new Moneda(2));
 		monedas.add(new Moneda(4));
-		monedas.add(new Moneda(6));
 		monedas.add(new Moneda(6));
 
 		System.out.println("\nIntroducido cambio = " + cambio + " y monedas (valor, cantidad) = " + monedas + "\n");
@@ -37,6 +38,41 @@ public class CambioMonedas {
 		// Version forward
 		solucion = forward(cambio, monedas);
 
+		System.out.println("**************** FORWARD ****************");
+		System.out.println("\nSecuencia de acciones: ");
+		accionesForward(solucion);
+	}
+
+	// Muestra la secuencia de acciones para la version forward
+	private static void accionesForward(ArrayList<Cambio> solucion) {
+
+		Cambio actual = mejorCambio(solucion);
+
+		while (actual != null) {
+			System.out.println(actual);
+			actual = actual.getVieneDe();
+		}
+
+	}
+
+	// Devuelve el mejor cambio de la solucion obtenida
+	private static Cambio mejorCambio(ArrayList<Cambio> solucion) {
+
+		Cambio mejor = solucion.get(0);
+
+		for (int i = 0; i < solucion.size(); i++) {
+			// Mejor cambio cuanto mayor sea la cantidad devuelta
+			if (solucion.get(i).getAcumulado() > mejor.getAcumulado()) {
+				mejor = solucion.get(i);
+				// En caso de devolver la misma cantidad, mejor cuantas menos monedas se
+				// utilicen
+			} else if (solucion.get(i).getAcumulado() == mejor.getAcumulado()) {
+				if (esMejor(solucion.get(i), mejor))
+					mejor = solucion.get(i);
+			}
+		}
+
+		return mejor;
 	}
 
 	// Version forward con lista de adyacentes
@@ -58,9 +94,9 @@ public class CambioMonedas {
 				Cambio nuevo = adyacentes.get(i);
 
 				// Si no ha sido creado, se incluye en la lista
-				if (!cambios.contains(nuevo)) {
+				if (!contiene(cambios, nuevo)) {
 					cambios.add(nuevo);
-					// Si ha sido creado, se comprueba si es mejor
+					// Si ya ha sido creado, se comprueba si es mejor
 				} else {
 					Cambio previo = cambios.get(cambios.indexOf(nuevo));
 					// Si es mejor, se actualiza el previo
@@ -98,6 +134,16 @@ public class CambioMonedas {
 			}
 		}
 		return siguiente;
+	}
+
+	// Comprueba si un cambio ya ha sido incluido en la lista de cambios generados
+	private static boolean contiene(ArrayList<Cambio> cambios, Cambio nuevo) {
+		for (int i = 0; i < cambios.size(); i++) {
+			if (cambios.get(i).equals(nuevo)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Devuelve los cambios posibles a partir de un cambio dado

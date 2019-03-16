@@ -3,11 +3,11 @@ package Practica2;
 public class Moneda {
 
 	private int valor;
-	
+
 	public Moneda(int valor) {
 		this.valor = valor;
 	}
-	
+
 	public int getValor() {
 		return valor;
 	}
@@ -20,6 +20,5 @@ public class Moneda {
 	public String toString() {
 		return "(" + valor + ")";
 	}
-
 
 }
