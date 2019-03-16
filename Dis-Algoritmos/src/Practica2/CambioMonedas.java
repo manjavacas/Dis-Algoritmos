@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 /**
  * @author Antonio Manjavacas, Ruben Marquez
- * 
+ *
  *         DEVOLUCION DE CAMBIO
- * 
+ *
  *         Se tienen k monedas: m1,m2,...,mn. Devolver un cambio C con el menor
  *         numero de monedas posible. En caso de no ser posible, devolver la
  *         mayor cantidad sin pasarse.
- * 
+ *
  *         Representar el grafo multietapico empleado y realizar implementacion
  *         backward, forward y matricial.
- * 
+ *
  **/
 
 public class CambioMonedas {
@@ -36,7 +36,7 @@ public class CambioMonedas {
 
 		// Version forward
 		solucion = forward(cambio, monedas);
-		
+
 	}
 
 	// Version forward con lista de adyacentes
@@ -56,7 +56,7 @@ public class CambioMonedas {
 			// Para cada adyacente, comprobar si ya ha sido creado
 			for (int i = 0; i < adyacentes.size(); i++) {
 				Cambio nuevo = adyacentes.get(i);
-				
+
 				// Si no ha sido creado, se incluye en la lista
 				if (!cambios.contains(nuevo)) {
 					cambios.add(nuevo);
@@ -76,6 +76,28 @@ public class CambioMonedas {
 
 		return cambios;
 
+	}
+
+	// Version backward con lista de adyacentes
+	private static ArrayList<Cambio> backward(int cambio, ArrayList<Moneda> monedas) {
+
+		ArrayList<Cambio> cambios = new ArrayList<Cambio>();
+		Cambio solucion = backward(cambio, monedas, cambios, new Cambio(null));
+		return null;
+	}
+
+	private static Cambio backward(int cambio, ArrayList<Moneda> monedas, ArrayList<Cambio> cambios, Cambio actual) {
+		Cambio siguiente = null;
+		if(cambios.contains(actual)) {
+			siguiente = cambios.get(cambios.indexOf(actual));
+		} else {
+			ArrayList<Cambio> adyacentes = getAdyacentes(actual, cambio, monedas);
+			for (int i = 0; i < adyacentes.size(); i++) {
+				Cambio nuevo = adyacentes.get(i);
+				siguiente = backward(cambio, monedas, cambios, nuevo);
+			}
+		}
+		return siguiente;
 	}
 
 	// Devuelve los cambios posibles a partir de un cambio dado
