@@ -61,7 +61,7 @@ public class Practica2 {
 		ArrayList<Cambio> acciones = new ArrayList<Cambio>();
 		CambioForward forward = new CambioForward(cambio, monedas);
 
-		solucion = forward.getSolucion(cambio, monedas);
+		solucion = forward.getSolucion();
 		acciones = forward.accionesForward(solucion);
 
 		System.out.println("********* FORWARD **********\nSecuencia de acciones forward:");

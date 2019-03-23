@@ -13,7 +13,7 @@ public class CambioForward {
 	}
 
 	// Version forward con lista de adyacentes
-	public ArrayList<Cambio> getSolucion(int cambio, ArrayList<Moneda> monedas) {
+	public ArrayList<Cambio> getSolucion() {
 
 		ArrayList<Cambio> cambios = new ArrayList<Cambio>();
 		cambios.add(new Cambio(null));
@@ -24,7 +24,7 @@ public class CambioForward {
 
 			// Obtener cambio y generar sus adyacentes
 			Cambio actual = cambios.get(pos);
-			ArrayList<Cambio> adyacentes = getAdyacentes(actual, cambio, monedas);
+			ArrayList<Cambio> adyacentes = getAdyacentes(actual);
 
 			// Para cada adyacente, comprobar si ya ha sido creado
 			for (int i = 0; i < adyacentes.size(); i++) {
@@ -52,7 +52,7 @@ public class CambioForward {
 	}
 
 	// Devuelve los cambios posibles a partir de un cambio dado
-	private ArrayList<Cambio> getAdyacentes(Cambio actual, int cambio, ArrayList<Moneda> monedas) {
+	private ArrayList<Cambio> getAdyacentes(Cambio actual) {
 
 		ArrayList<Cambio> adyacentes = new ArrayList<Cambio>();
 
@@ -116,22 +116,6 @@ public class CambioForward {
 			actual = actual.getVieneDe();
 		}
 		return acciones;
-	}
-
-	public int getCambio() {
-		return cambio;
-	}
-
-	public void setCambio(int cambio) {
-		this.cambio = cambio;
-	}
-
-	public ArrayList<Moneda> getMonedas() {
-		return monedas;
-	}
-
-	public void setMonedas(ArrayList<Moneda> monedas) {
-		this.monedas = monedas;
 	}
 
 }
