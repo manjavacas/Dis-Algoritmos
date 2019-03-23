@@ -83,8 +83,7 @@ public class CambioForward {
 
 	// Comprueba si el cambio c1 es mejor que el cambio c2
 	private boolean esMejor(Cambio c1, Cambio c2) {
-		// Un cambio es mejor que otro si emplea un menor numero de monedas
-		return c1.getMonedas().size() < c2.getMonedas().size();
+		return c1.getNumMonedas() < c2.getNumMonedas();
 	}
 
 	// Devuelve el mejor cambio de la solucion obtenida
@@ -96,8 +95,7 @@ public class CambioForward {
 			// Mejor cambio cuanto mayor sea la cantidad devuelta
 			if (solucion.get(i).getAcumulado() > mejor.getAcumulado()) {
 				mejor = solucion.get(i);
-				// En caso de devolver la misma cantidad, mejor cuantas menos monedas se
-				// utilicen
+				// Mejor cuantas menos monedas se utilicen
 			} else if (solucion.get(i).getAcumulado() == mejor.getAcumulado()) {
 				if (esMejor(solucion.get(i), mejor))
 					mejor = solucion.get(i);
@@ -109,6 +107,7 @@ public class CambioForward {
 
 	// Muestra la secuencia de acciones para la version forward
 	public ArrayList<Cambio> accionesForward(ArrayList<Cambio> solucion) {
+
 		ArrayList<Cambio> acciones = new ArrayList<Cambio>();
 		Cambio actual = mejorCambio(solucion);
 
@@ -117,7 +116,6 @@ public class CambioForward {
 			actual = actual.getVieneDe();
 		}
 		return acciones;
-
 	}
 
 	public int getCambio() {

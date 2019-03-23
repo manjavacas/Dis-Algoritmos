@@ -27,6 +27,10 @@ public class Cambio {
 	public void setVieneDe(Cambio vieneDe) {
 		this.vieneDe = vieneDe;
 	}
+	
+	public int getNumMonedas() {
+		return monedas.size();
+	}
 
 	// Obtener valor acumulado
 	public int getAcumulado() {
