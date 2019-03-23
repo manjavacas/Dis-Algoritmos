@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CambioBackward {
 
 	// Version backward con lista de adyacentes
-	private ArrayList<Cambio> backward(int cambio, ArrayList<Moneda> monedas) {
+	private ArrayList<Cambio> getSolucion(int cambio, ArrayList<Moneda> monedas) {
 		ArrayList<Cambio> cambios = new ArrayList<Cambio>();
 		Cambio solucion = backward(cambio, monedas, cambios, new Cambio(null));
 		return null;
