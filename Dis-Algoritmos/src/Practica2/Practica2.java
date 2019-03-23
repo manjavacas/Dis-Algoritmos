@@ -11,12 +11,11 @@ import java.util.Scanner;
  *         Se tienen k monedas: m1,m2,...,mn. Devolver un cambio C con el menor
  *         numero de monedas posible. En caso de no ser posible, devolver la
  *         mayor cantidad sin pasarse.
-
  *
  **/
 
 public class Practica2 {
-	
+
 	static Scanner leer = new Scanner(System.in);
 
 	public static void main(String[] args) {
