@@ -25,12 +25,6 @@ public class Practica2 {
 		int cambio = leer.nextInt();
 		ArrayList<Moneda> monedas = introducirMonedas();
 
-		// Datos de prueba
-		//	monedas.add(new Moneda(1));
-		//	monedas.add(new Moneda(2));
-		//	monedas.add(new Moneda(4));
-		//	monedas.add(new Moneda(6));
-
 		System.out.println("\nIntroducido cambio = " + cambio + " y monedas = " + monedas + "\n");
 
 		forward(cambio, monedas);
@@ -77,7 +71,7 @@ public class Practica2 {
 		CambioMatricesForward mforward = new CambioMatricesForward(cambio, monedas);
 		
 		solucion = mforward.getSolucion();
-		System.out.println("\n********* FORWARD MATRICES **********\n");
+		System.out.println("\n********* FORWARD MATRICES **********");
 		for (int i = 0; i < solucion.length; i++)
 			System.out.print(solucion[i]);
 		

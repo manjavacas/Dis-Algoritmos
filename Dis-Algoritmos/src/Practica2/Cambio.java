@@ -7,6 +7,11 @@ public class Cambio {
 	private ArrayList<Moneda> monedas;
 	private Cambio vieneDe;
 
+	public Cambio() {
+		this.monedas = new ArrayList<Moneda>();
+		this.vieneDe = null;
+	}
+
 	public Cambio(Cambio vieneDe) {
 		this.monedas = new ArrayList<Moneda>();
 		this.vieneDe = vieneDe;
@@ -27,7 +32,7 @@ public class Cambio {
 	public void setVieneDe(Cambio vieneDe) {
 		this.vieneDe = vieneDe;
 	}
-	
+
 	public int getNumMonedas() {
 		return monedas.size();
 	}

@@ -16,7 +16,7 @@ public class CambioForward {
 	public ArrayList<Cambio> getSolucion() {
 
 		ArrayList<Cambio> cambios = new ArrayList<Cambio>();
-		cambios.add(new Cambio(null));
+		cambios.add(new Cambio());
 
 		int pos = 0;
 
