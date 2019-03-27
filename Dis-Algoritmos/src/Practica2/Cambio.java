@@ -1,28 +1,59 @@
 package Practica2;
 
-import java.util.ArrayList;
-
 public class Cambio {
 
-	private ArrayList<Moneda> monedas;
+	private int etapa;
+	private int restante;
+	private int pongo;
+	private int numMonedas;
 	private Cambio vieneDe;
 
-	public Cambio() {
-		this.monedas = new ArrayList<Moneda>();
+	public Cambio(int etapa) {
+		this.etapa = etapa;
+		this.restante = 0;
+		this.pongo = 0;
+		this.numMonedas = 0;
 		this.vieneDe = null;
 	}
 
-	public Cambio(Cambio vieneDe) {
-		this.monedas = new ArrayList<Moneda>();
+	public Cambio(int etapa, int restante, int pongo, int numMonedas, Cambio vieneDe) {
+		this.etapa = etapa;
+		this.restante = restante;
+		this.pongo = pongo;
+		this.numMonedas = numMonedas;
 		this.vieneDe = vieneDe;
 	}
 
-	public ArrayList<Moneda> getMonedas() {
-		return monedas;
+	public int getEtapa() {
+		return etapa;
 	}
 
-	public void setMonedas(ArrayList<Moneda> monedas) {
-		this.monedas = monedas;
+	public void setEtapa(int etapa) {
+		this.etapa = etapa;
+	}
+
+	public int getRestante() {
+		return restante;
+	}
+
+	public void setRestante(int restante) {
+		this.restante = restante;
+	}
+
+	public int getPongo() {
+		return pongo;
+	}
+
+	public void setPongo(int pongo) {
+		this.pongo = pongo;
+	}
+
+	public int getNumMonedas() {
+		return numMonedas;
+	}
+
+	public void setNumMonedas(int numMonedas) {
+		this.numMonedas = numMonedas;
 	}
 
 	public Cambio getVieneDe() {
@@ -33,34 +64,21 @@ public class Cambio {
 		this.vieneDe = vieneDe;
 	}
 
-	public int getNumMonedas() {
-		return monedas.size();
+	@Override
+	public boolean equals(Object c) {
+		return c instanceof Cambio && getEtapa() == ((Cambio) c).getEtapa()
+				&& getRestante() == ((Cambio) c).getRestante();
 	}
 
-	// Obtener valor acumulado
-	public int getAcumulado() {
-		int acumulado = 0;
-
-		for (int i = 0; i < monedas.size(); i++) {
-			acumulado += monedas.get(i).getValor();
-		}
-		return acumulado;
-	}
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		if (vieneDe == null) {
-			return "Cambio [monedas=" + monedas + ", vieneDe=null, acumulado=" + getAcumulado() + "]";
-		} else {
-			return "Cambio [monedas=" + monedas + ", vieneDe=" + vieneDe.getMonedas() + ", acumulado=" + getAcumulado()
-					+ "]";
-		}
+		return "Cambio [etapa=" + etapa + ", restante=" + restante + ", pongo=" + pongo + ", numMonedas=" + numMonedas
+				+ ", vieneDe=" + vieneDe + "]";
 	}
 
-	@Override
-	// Dos cambios son iguales si acumulan el mismo valor
-	public boolean equals(Object cambio) {
-		return (cambio instanceof Cambio) && this.getAcumulado() == ((Cambio) cambio).getAcumulado();
-	}
+
 
 }
