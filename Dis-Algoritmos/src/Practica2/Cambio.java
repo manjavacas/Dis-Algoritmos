@@ -6,6 +6,7 @@ public class Cambio {
 	private int restante;
 	private int pongo;
 	private int numMonedas;
+	private int valor;
 	private Cambio vieneDe;
 
 	public Cambio(int etapa) {
@@ -21,6 +22,15 @@ public class Cambio {
 		this.restante = restante;
 		this.pongo = pongo;
 		this.numMonedas = numMonedas;
+		this.vieneDe = vieneDe;
+	}
+
+	public Cambio(int etapa, int restante, int pongo, int numMonedas, int valor, Cambio vieneDe) {
+		this.etapa = etapa;
+		this.restante = restante;
+		this.pongo = pongo;
+		this.numMonedas = numMonedas;
+		this.valor = valor;
 		this.vieneDe = vieneDe;
 	}
 
@@ -54,6 +64,14 @@ public class Cambio {
 
 	public void setNumMonedas(int numMonedas) {
 		this.numMonedas = numMonedas;
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 
 	public Cambio getVieneDe() {

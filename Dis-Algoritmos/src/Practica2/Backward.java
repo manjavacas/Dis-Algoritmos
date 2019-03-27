@@ -16,7 +16,7 @@ public class Backward {
 
 	public Cambio resolver() {
 
-		Cambio primer = new Cambio(-1, cambio, 0, 0, null);
+		Cambio primer = new Cambio(-1, cambio, 0, 0, 0, null);
 
 		return backward(primer, new ArrayList<Cambio>());
 	}
@@ -32,13 +32,12 @@ public class Backward {
 				int max = actual.getRestante() / monedas[etapa];
 				for (int n = 0; n <= max; n++) {
 					int nuevoRestante = actual.getRestante() - monedas[etapa] * n;
-					int nuevoNumMonedas = actual.getNumMonedas() + n;
 					if (nuevoRestante >= 0) {
-						Cambio nuevo = new Cambio(etapa, 0, 0, nuevoNumMonedas, null);
+						Cambio nuevo = new Cambio(etapa, nuevoRestante, n, 0, 0, null);
 						valor = backward(nuevo, cambios);
 						if (esMejor(valor, actual)) {
-							actual.setRestante(valor.getRestante() - monedas[valor.getEtapa()] * n);
-							actual.setPongo(n);
+							actual.setNumMonedas(valor.getNumMonedas() + valor.getPongo());
+							actual.setValor(valor.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()]);
 							actual.setVieneDe(valor);
 						}
 					}
@@ -53,9 +52,11 @@ public class Backward {
 	}
 
 	private boolean esMejor(Cambio nuevo, Cambio viejo) {
-		if (nuevo.getRestante() < viejo.getRestante())
+		if(viejo.getValor() == 0) {
 			return true;
-		else if (nuevo.getRestante() == viejo.getRestante() && nuevo.getNumMonedas() < viejo.getNumMonedas())
+		} else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] > viejo.getValor())
+			return true;
+		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] ==  viejo.getValor() && nuevo.getNumMonedas() + nuevo.getPongo() < viejo.getNumMonedas())
 			return true;
 		return false;
 	}
