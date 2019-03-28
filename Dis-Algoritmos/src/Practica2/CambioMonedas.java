@@ -5,7 +5,7 @@ public class CambioMonedas {
 	public static void main(String[] args) {
 
 		int cambio = 5;
-		int[] monedas = { 1, 2, 4 };
+		int[] monedas = { 1, 5, 7 };
 
 		forward(cambio, monedas);
 		backward(cambio, monedas);
