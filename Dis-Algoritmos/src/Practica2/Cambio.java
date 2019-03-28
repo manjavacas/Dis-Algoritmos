@@ -85,7 +85,7 @@ public class Cambio {
 	@Override
 	public boolean equals(Object c) {
 		return c instanceof Cambio && getEtapa() == ((Cambio) c).getEtapa()
-				&& getRestante() == ((Cambio) c).getRestante();
+				&& getRestante() == ((Cambio) c).getRestante() && getPongo() == ((Cambio) c).getPongo();
 	}
 
 	/* (non-Javadoc)

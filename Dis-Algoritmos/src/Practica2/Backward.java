@@ -37,7 +37,7 @@ public class Backward {
 						valor = backward(nuevo, cambios);
 						if (esMejor(valor, actual)) {
 							actual.setNumMonedas(valor.getNumMonedas() + valor.getPongo());
-							actual.setValor(valor.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()]);
+							actual.setValor(valor.getValor() + valor.getPongo()*monedas[valor.getEtapa()]);
 							actual.setVieneDe(valor);
 						}
 					}
@@ -52,11 +52,11 @@ public class Backward {
 	}
 
 	private boolean esMejor(Cambio nuevo, Cambio viejo) {
-		if(viejo.getValor() == 0) {
+		if(viejo.getValor() == 0)
 			return true;
-		} else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] > viejo.getValor())
+		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] > viejo.getValor())
 			return true;
-		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] ==  viejo.getValor() && nuevo.getNumMonedas() + nuevo.getPongo() < viejo.getNumMonedas())
+		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] == viejo.getValor() && nuevo.getNumMonedas() + nuevo.getPongo() < viejo.getNumMonedas())
 			return true;
 		return false;
 	}

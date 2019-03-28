@@ -6,8 +6,8 @@ public class CambioMonedas {
 
 	public static void main(String[] args) {
 
-		int cambio = 800;
-		int[] monedas = {15,37,3,1};
+		int cambio = 29;
+		int[] monedas = { 6, 4, 2 };
 		Arrays.sort(monedas);
 
 		forward(cambio, monedas);
