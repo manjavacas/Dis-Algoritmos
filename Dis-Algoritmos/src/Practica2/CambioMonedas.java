@@ -1,11 +1,14 @@
 package Practica2;
 
+import java.util.Arrays;
+
 public class CambioMonedas {
 
 	public static void main(String[] args) {
 
-		int cambio = 5;
-		int[] monedas = { 1, 5, 7 };
+		int cambio = 800;
+		int[] monedas = {15,37,3,1};
+		Arrays.sort(monedas);
 
 		forward(cambio, monedas);
 		backward(cambio, monedas);

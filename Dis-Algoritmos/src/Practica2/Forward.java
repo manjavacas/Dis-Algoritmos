@@ -31,7 +31,8 @@ public class Forward {
 				for (int n = 0; n <= max; n++) {
 					int nuevoRestante = actual.getRestante() - monedas[etapa] * n;
 					if (nuevoRestante >= 0) {
-						nuevo = new Cambio(etapa, nuevoRestante, n, actual.getNumMonedas() + n, actual.getValor() + monedas[etapa]*n, actual);
+						nuevo = new Cambio(etapa, nuevoRestante, n, actual.getNumMonedas() + n,
+								actual.getValor() + monedas[etapa] * n, actual);
 						if (!cambios.contains(nuevo)) {
 							cambios.add(nuevo);
 						} else {
@@ -60,10 +61,7 @@ public class Forward {
 			return true;
 		} else if (nuevo.getValor() == previo.getValor() && nuevo.getNumMonedas() < previo.getNumMonedas()) {
 			return true;
-		} else if (nuevo.getValor() == previo.getValor() && nuevo.getNumMonedas() == previo.getNumMonedas() && nuevo.getEtapa() > previo.getEtapa()) {
-			return true;
 		}
-
 		return false;
 	}
 
@@ -72,7 +70,7 @@ public class Forward {
 		Cambio mejor = cambios.get(0);
 
 		for (int i = 0; i < cambios.size(); i++) {
-			if (esMejor(cambios.get(i), mejor)) {
+			if (esMejor(cambios.get(i), mejor) && cambios.get(i).getEtapa() == monedas.length - 1) {
 				mejor = cambios.get(i);
 			}
 		}
