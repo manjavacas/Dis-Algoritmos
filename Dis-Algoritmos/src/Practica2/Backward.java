@@ -15,10 +15,8 @@ public class Backward {
 	}
 
 	public Cambio resolver() {
-
-		Cambio primer = new Cambio(-1, cambio, 0, 0, 0, null);
-
-		return backward(primer, new ArrayList<Cambio>());
+		Cambio primero = new Cambio(-1, cambio, 0, 0, 0, null);
+		return backward(primero, new ArrayList<Cambio>());
 	}
 
 	private Cambio backward(Cambio actual, ArrayList<Cambio> cambios) {
@@ -37,7 +35,7 @@ public class Backward {
 						valor = backward(nuevo, cambios);
 						if (esMejor(valor, actual)) {
 							actual.setNumMonedas(valor.getNumMonedas() + valor.getPongo());
-							actual.setValor(valor.getValor() + valor.getPongo()*monedas[valor.getEtapa()]);
+							actual.setValor(valor.getValor() + valor.getPongo() * monedas[valor.getEtapa()]);
 							actual.setVieneDe(valor);
 						}
 					}
@@ -52,11 +50,12 @@ public class Backward {
 	}
 
 	private boolean esMejor(Cambio nuevo, Cambio viejo) {
-		if(viejo.getValor() == 0)
+		if (viejo.getValor() == 0)
 			return true;
-		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] > viejo.getValor())
+		else if (nuevo.getValor() + nuevo.getPongo() * monedas[nuevo.getEtapa()] > viejo.getValor())
 			return true;
-		else if (nuevo.getValor() + nuevo.getPongo()*monedas[nuevo.getEtapa()] == viejo.getValor() && nuevo.getNumMonedas() + nuevo.getPongo() < viejo.getNumMonedas())
+		else if (nuevo.getValor() + nuevo.getPongo() * monedas[nuevo.getEtapa()] == viejo.getValor()
+				&& nuevo.getNumMonedas() + nuevo.getPongo() < viejo.getNumMonedas())
 			return true;
 		return false;
 	}

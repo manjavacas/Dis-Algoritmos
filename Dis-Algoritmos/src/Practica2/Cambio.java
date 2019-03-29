@@ -88,9 +88,6 @@ public class Cambio {
 				&& getRestante() == ((Cambio) c).getRestante() && getPongo() == ((Cambio) c).getPongo();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Cambio [etapa=" + etapa + ", restante=" + restante + ", pongo=" + pongo + ", numMonedas=" + numMonedas
