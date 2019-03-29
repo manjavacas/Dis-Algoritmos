@@ -48,6 +48,7 @@ public class MatricesForward {
 			}
 		}
 
+		
 		System.out.println("\n******** VALORES *******");
 		for (int i = 0; i < valores.length; i++) {
 			for (int j = 0; j < valores[0].length; j++) {
