@@ -21,6 +21,7 @@ public class CambioMonedas {
 		// Calcular cambio
 		forward(cambio, monedas);
 		backward(cambio, monedas);
+		forwardMatrices(cambio, monedas);
 	}
 
 	private static void forward(int cambio, int[] monedas) {
@@ -61,6 +62,13 @@ public class CambioMonedas {
 		}
 
 		return sol;
+	}
+	
+	private static void forwardMatrices(int cambio, int[] monedas) {
+		MatricesForward fm = new MatricesForward(cambio, monedas);
+		int[] sol = fm.resolver();
+		System.out.println("\n\n****************** FORWARD MATRICES ******************");
+		imprimir(sol, monedas);		
 	}
 
 	private static void imprimir(int[] sol, int[] monedas) {
