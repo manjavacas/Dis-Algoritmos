@@ -23,6 +23,29 @@ public class MatricesForward {
 
 		forwardMatriz(valores, ruta);
 		solucion = matriz(valores, ruta);
+
+//		System.out.println("\n******** VALORES *******");
+//		for (int i = 0; i < valores.length; i++) {
+//			for (int j = 0; j < valores[0].length; j++) {
+//				if (valores[i][j] == -1)
+//					System.out.print("X   ");
+//				else
+//					System.out.print(valores[i][j] + "   ");
+//			}
+//			System.out.println();
+//		}
+//
+//		System.out.println("\n******** RUTA *******");
+//		for (int i = 0; i < ruta.length; i++) {
+//			for (int j = 0; j < ruta[0].length; j++) {
+//				if (ruta[i][j] == -1)
+//					System.out.print("X   ");
+//				else
+//					System.out.print(ruta[i][j] + "   ");
+//			}
+//			System.out.println();
+//		}
+
 		return solucion;
 	}
 
@@ -38,37 +61,14 @@ public class MatricesForward {
 					for (int p = 0; p <= max; p++) {
 						int nuevaFil = fil - monedas[colMoneda] * p;
 						if (nuevaFil >= 0) {
+							ruta[nuevaFil][nuevaCol] = p;
 							if (valores[nuevaFil][nuevaCol] < valores[fil][colMoneda] + monedas[colMoneda] * p) {
 								valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + monedas[colMoneda] * p;
-								ruta[nuevaFil][nuevaCol] = p;
 							}
 						}
 					}
 				}
 			}
-		}
-
-		System.out.println("\n******** VALORES *******");
-		for (int i = 0; i < valores.length; i++) {
-			for (int j = 0; j < valores[0].length; j++) {
-				if (valores[i][j] == -1)
-					System.out.print("X   ");
-				else
-					System.out.print(valores[i][j] + "   ");
-			}
-			System.out.println();
-		}
-		
-		System.out.println("\n******** RUTA *******");
-		for (int i = 0; i < ruta.length; i++) {
-			for (int j = 0; j < ruta[0].length; j++) {
-
-				if (ruta[i][j] == -1)
-					System.out.print("X   ");
-				else
-					System.out.print(ruta[i][j] + "   ");
-			}
-			System.out.println();
 		}
 
 	}
