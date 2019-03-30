@@ -38,9 +38,8 @@ public class MatricesForward {
 					for (int p = 0; p <= max; p++) {
 						int nuevaFil = fil - monedas[colMoneda] * p;
 						if (nuevaFil >= 0) {
-							if (valores[nuevaFil][nuevaCol] > valores[fil][colMoneda] + p
-									|| valores[nuevaFil][nuevaCol] == -1) {
-								valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + p;
+							if (valores[nuevaFil][nuevaCol] < valores[fil][colMoneda] + monedas[colMoneda] * p) {
+								valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + monedas[colMoneda] * p;
 								ruta[nuevaFil][nuevaCol] = p;
 							}
 						}
@@ -52,14 +51,22 @@ public class MatricesForward {
 		System.out.println("\n******** VALORES *******");
 		for (int i = 0; i < valores.length; i++) {
 			for (int j = 0; j < valores[0].length; j++) {
-				System.out.print(valores[i][j] + "   ");
+				if (valores[i][j] == -1)
+					System.out.print("X   ");
+				else
+					System.out.print(valores[i][j] + "   ");
 			}
 			System.out.println();
 		}
+		
 		System.out.println("\n******** RUTA *******");
 		for (int i = 0; i < ruta.length; i++) {
 			for (int j = 0; j < ruta[0].length; j++) {
-				System.out.print(ruta[i][j] + "   ");
+
+				if (ruta[i][j] == -1)
+					System.out.print("X   ");
+				else
+					System.out.print(ruta[i][j] + "   ");
 			}
 			System.out.println();
 		}
@@ -81,7 +88,7 @@ public class MatricesForward {
 	private int filaMejor(int col, int[][] valores) {
 		int filaMejor = 0;
 		for (int fil = 1; fil < valores.length; fil++)
-			if (valores[fil][col] < valores[filaMejor][col])
+			if (valores[fil][col] > valores[filaMejor][col])
 				filaMejor = fil;
 		return filaMejor;
 	}
