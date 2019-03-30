@@ -39,8 +39,10 @@ public class MatricesForward {
 						int nuevaFil = fil - monedas[colMoneda] * p;
 						if (nuevaFil >= 0) {
 							if (valores[nuevaFil][nuevaCol] < valores[fil][colMoneda] + monedas[colMoneda] * p) {
-								// Otra opcion: if (valores[nuevaFil][nuevaCol] > valores[fil][colMoneda] +  p || valores[nuevaFil][nuevaCol] == -1) {
-								// valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + p; }
+								// Otra opcion: 
+								// if (valores[nuevaFil][nuevaCol] > valores[fil][colMoneda] +  p || valores[nuevaFil][nuevaCol] == -1) {
+								// 		valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + p; 
+								// }
 								valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + monedas[colMoneda] * p;
 								ruta[nuevaFil][nuevaCol] = p;
 							}
