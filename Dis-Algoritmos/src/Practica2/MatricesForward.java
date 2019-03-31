@@ -61,7 +61,6 @@ public class MatricesForward {
 					for (int p = 0; p <= max; p++) {
 						int nuevaFil = fil - monedas[colMoneda] * p;
 						if (nuevaFil >= 0) {
-
 							if (valores[nuevaFil][nuevaCol] < valores[fil][colMoneda] + monedas[colMoneda] * p) {
 								valores[nuevaFil][nuevaCol] = valores[fil][colMoneda] + monedas[colMoneda] * p;
 								ruta[nuevaFil][nuevaCol] = p;
