@@ -37,10 +37,12 @@ public class MatricesForward {
 				int max = restante / monedas[monedaActual];
 				for (int p = 0; p <= max; p++) {
 					int nuevoRestante = restante - monedas[monedaActual] * p;
+
 					if (matrizValor[nuevoRestante][monedaActual] >= matrizValor[restante][monedaActual - 1] + p) {
 						matrizValor[nuevoRestante][monedaActual] = matrizValor[restante][monedaActual - 1] + p;
 						matrizRuta[nuevoRestante][monedaActual] = p;
 					}
+
 				}
 			}
 		}
@@ -49,18 +51,23 @@ public class MatricesForward {
 	}
 
 	public int[] obtenerSolucion(int[][] sol) {
+
 		int[] solucion = new int[monedas.length];
 		boolean noSol = true;
+
 		for (int i = 0; i < sol.length && noSol; i++) {
 			noSol = false;
 			int fila = i;
+
 			for (int col = sol[0].length - 1; col >= 0 && !noSol; col--) {
 				if(sol[fila][col] == -1)
 					noSol = true;
 				solucion[col] = sol[fila][col];
 				fila += sol[fila][col] * monedas[col];
 			}
+
 		}
+
 		return solucion;
 	}
 }

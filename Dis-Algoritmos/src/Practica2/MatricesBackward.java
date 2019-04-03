@@ -45,17 +45,21 @@ public class MatricesBackward {
 	}
 
 	public int matrizBackward(int cambioRestante, int moneda) {
+
 		if (matrizRuta[cambioRestante][moneda] == 0) {
 			if (moneda == numMonedas - 1) {
 				matrizRuta[cambioRestante][moneda] = cambioRestante / monedas[moneda];
 				matrizMonedas[cambioRestante][moneda] = cambioRestante / monedas[moneda];
 				matrizCambio[cambioRestante][moneda] = (cambioRestante / monedas[moneda]) * monedas[moneda];
+
 			} else {
 				int max = cambioRestante / monedas[moneda];
+
 				for (int meto = 0; meto <= max; meto++) {
 					int nuevoCambio = matrizBackward(cambioRestante - monedas[moneda] * meto, moneda + 1)
 							+ monedas[moneda] * meto;
 					int nuevasMonedas = matrizMonedas[cambioRestante - monedas[moneda] * meto][moneda + 1] + meto;
+
 					if (nuevoCambio <= cambio) {
 						if (nuevoCambio > matrizCambio[cambioRestante][moneda]
 								|| (nuevoCambio == matrizCambio[cambioRestante][moneda]
@@ -66,8 +70,10 @@ public class MatricesBackward {
 						}
 					}
 				}
+
 			}
 		}
+
 		return matrizCambio[cambioRestante][moneda];
 	}
 }
