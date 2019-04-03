@@ -1,68 +1,71 @@
 package Practica2;
 
 public class MatricesBackward {
-
-	private int cambio;
-	private int numMonedas;
 	private int[] monedas;
-	private int[][] matrizValor;
-	private int[][] matrizRuta;
+	private int[][] matrizMonedas;
 
 	public MatricesBackward(int cambio, int[] monedas) {
-		this.cambio = cambio;
+		matrizMonedas = new int[cambio + 1][monedas.length];
+		inicializar(matrizMonedas);
 		this.monedas = monedas;
-		this.numMonedas = monedas.length;
-		this.matrizValor = new int[cambio + 1][monedas.length];
-		this.matrizRuta = new int[cambio + 1][monedas.length];
 	}
 
-	public int[] resolver() {
-
-		int[] solucion = new int[monedas.length];
-
-		for (int f = 0; f < matrizValor.length; f++)
-			for (int c = 0; c < numMonedas; c++) {
-				matrizValor[f][c] = 99;
-				matrizRuta[f][c] = -1;
+	public void inicializar(int[][] matriz) {
+		for(int i = 0; i < matriz.length; i++) {
+			for(int j = 0; j < matriz[0].length; j++) {
+				matriz[i][j] = 0;
 			}
-
-		backwardMatriz(cambio, 0);
-
-		for(int i = 0; i < monedas.length; i++) {
-			solucion[i] = matrizRuta[cambio][i];
-			cambio -= matrizRuta[cambio][i]*monedas[i];
 		}
+	}
 
+	public int[] resolver(int cambio) {
+		int[] solucion = new int[monedas.length];
+		matrizBackward(cambio, 0);
+		for(int i = 0; i < monedas.length; i++) {
+			solucion[i] = matrizMonedas[cambio][i];
+			cambio -= matrizMonedas[cambio][i]*monedas[i];
+		}
 		return solucion;
 	}
 
-	public int backwardMatriz(int cambioRestante, int monedaActual) {
-		if(matrizValor[cambioRestante][monedaActual] == 99) {
-			if(monedaActual == numMonedas - 1) {
-				int meto = cambioRestante / monedas[monedaActual];
-				matrizValor[cambioRestante][monedaActual] = meto;
-				matrizRuta[cambioRestante][monedaActual] = meto;
+	public int matrizBackward(int cambioRestante, int moneda) {
+		if(matrizMonedas[cambioRestante][moneda] == 0) {
+			if(moneda == matrizMonedas[0].length - 1) {
+				matrizMonedas[cambioRestante][moneda] = cambioRestante / monedas[moneda];
 			} else {
-				int max = cambioRestante / monedas[monedaActual];
-				for(int p = 0; p <= max; p++) {
-					int nuevoRestante = cambioRestante - monedas[monedaActual] * p;
-					int nuevoValor = backwardMatriz(cambioRestante - monedas[monedaActual] * p, monedaActual + 1) + p;
-					if(esMejor(cambioRestante, monedaActual, nuevoRestante, nuevoValor)) {
-						matrizValor[cambioRestante][monedaActual] = nuevoValor;
-						matrizRuta[cambioRestante][monedaActual] = p;
+				for(int quito = 0; cambioRestante >= monedas[moneda]*quito; quito++) {
+					int valor = matrizBackward(cambioRestante - monedas[moneda]*quito, moneda+1);
+					if(esMejor(valor, quito, cambioRestante, moneda)) {
+						matrizMonedas[cambioRestante][moneda] = quito;
 					}
 				}
 			}
 		}
-		return matrizValor[cambioRestante][monedaActual];
+		return matrizMonedas[cambioRestante][moneda];
 	}
 
-	public boolean esMejor(int cambioRestante, int monedaActual, int nuevoRestante, int nuevoValor) {
-		int viejoRestante = cambioRestante - matrizRuta[cambioRestante][monedaActual] * monedas[monedaActual];
-		if(viejoRestante > nuevoRestante) {
-			return true;
+	public boolean esMejor(int nuevo, int quito, int cambioRestante, int moneda) {
+		int acumuladoViejo = 0, acumuladoNuevo = 0;
+		int numMonedasViejo = 0, numMonedasNuevo = 0;
+		int aux = cambioRestante;
+		for(int i = moneda; i < monedas.length; i++) {
+			numMonedasViejo += matrizMonedas[aux][i];
+			acumuladoViejo += matrizMonedas[aux][i]*monedas[i];
+			aux -= matrizMonedas[aux][i]*monedas[i];
 		}
-		else if(viejoRestante == nuevoRestante && nuevoValor < matrizValor[cambioRestante][monedaActual]) {
+		acumuladoNuevo += quito*monedas[moneda] + nuevo*monedas[moneda+1];
+		int aux2 = cambioRestante - quito*monedas[moneda];
+		aux2 -= nuevo*monedas[moneda+1];
+		numMonedasNuevo += quito + nuevo;
+		for(int i = moneda + 2; i < monedas.length; i++) {
+			numMonedasNuevo += matrizMonedas[aux2][i];
+			acumuladoNuevo += matrizMonedas[aux2][i]*monedas[i];
+			aux2 -= matrizMonedas[aux2][i]*monedas[i];
+		}
+
+		if(acumuladoNuevo > acumuladoViejo) {
+			return true;
+		} else if(acumuladoNuevo == acumuladoViejo && numMonedasNuevo < numMonedasViejo) {
 			return true;
 		}
 		return false;

@@ -66,14 +66,14 @@ public class CambioMonedas {
 	}
 
 	private static void forwardMatrices(int cambio, int[] monedas) {
-		MatricesForwardPrueba fm = new MatricesForwardPrueba(cambio, monedas);
+		MatricesForward fm = new MatricesForward(cambio, monedas);
 		int[][] sol = fm.resolver();
 		System.out.println("\n\n****************** FORWARD MATRICES ******************");
 		imprimir(sol, monedas);
 	}
 
 	private static void backwardMatrices(int cambio, int[] monedas) {
-		MatricesBackwardPrueba bm = new MatricesBackwardPrueba(cambio, monedas);
+		MatricesBackward bm = new MatricesBackward(cambio, monedas);
 		int[] sol = bm.resolver(cambio);
 		System.out.println("\n\n****************** BACKWARD MATRICES ******************");
 		imprimir(sol, monedas);
