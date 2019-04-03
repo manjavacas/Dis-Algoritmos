@@ -5,66 +5,69 @@ public class MatricesBackward {
 	private int cambio;
 	private int numMonedas;
 	private int[] monedas;
-	private int[][] matrizValor;
+	private int[][] matrizCambio;
+	private int[][] matrizMonedas;
 	private int[][] matrizRuta;
 
 	public MatricesBackward(int cambio, int[] monedas) {
+
 		this.cambio = cambio;
-		this.monedas = monedas;
 		this.numMonedas = monedas.length;
-		this.matrizValor = new int[cambio + 1][monedas.length];
-		this.matrizRuta = new int[cambio + 1][monedas.length];
+		this.monedas = monedas;
+		this.matrizCambio = new int[cambio + 1][numMonedas];
+		this.matrizMonedas = new int[cambio + 1][numMonedas];
+		this.matrizRuta = new int[cambio + 1][numMonedas];
+		inicializar();
 	}
 
-	public int[] resolver() {
+	public void inicializar() {
+
+		for (int i = 0; i < matrizCambio.length; i++) {
+			for (int j = 0; j < numMonedas; j++) {
+				matrizCambio[i][j] = -1;
+				matrizMonedas[i][j] = Integer.MAX_VALUE;
+				matrizRuta[i][j] = 0;
+			}
+		}
+	}
+
+	public int[] resolver(int cambio) {
 
 		int[] solucion = new int[monedas.length];
+		matrizBackward(cambio, 0);
 
-		for (int f = 0; f < matrizValor.length; f++)
-			for (int c = 0; c < numMonedas; c++) {
-				matrizValor[f][c] = 99;
-				matrizRuta[f][c] = -1;
-			}
-
-		backwardMatriz(cambio, 0);
-
-		for(int i = 0; i < monedas.length; i++) {
+		for (int i = 0; i < monedas.length; i++) {
 			solucion[i] = matrizRuta[cambio][i];
-			cambio -= matrizRuta[cambio][i]*monedas[i];
+			cambio -= matrizRuta[cambio][i] * monedas[i];
 		}
 
 		return solucion;
 	}
 
-	public int backwardMatriz(int cambioRestante, int monedaActual) {
-		if(matrizValor[cambioRestante][monedaActual] == 99) {
-			if(monedaActual == numMonedas - 1) {
-				int meto = cambioRestante / monedas[monedaActual];
-				matrizValor[cambioRestante][monedaActual] = meto;
-				matrizRuta[cambioRestante][monedaActual] = meto;
+	public int matrizBackward(int cambioRestante, int moneda) {
+		if (matrizRuta[cambioRestante][moneda] == 0) {
+			if (moneda == numMonedas - 1) {
+				matrizRuta[cambioRestante][moneda] = cambioRestante / monedas[moneda];
+				matrizMonedas[cambioRestante][moneda] = cambioRestante / monedas[moneda];
+				matrizCambio[cambioRestante][moneda] = (cambioRestante / monedas[moneda]) * monedas[moneda];
 			} else {
-				int max = cambioRestante / monedas[monedaActual];
-				for(int p = 0; p <= max; p++) {
-					int nuevoRestante = cambioRestante - monedas[monedaActual] * p;
-					int nuevoValor = backwardMatriz(cambioRestante - monedas[monedaActual] * p, monedaActual + 1) + p;
-					if(esMejor(cambioRestante, monedaActual, nuevoRestante, nuevoValor)) {
-						matrizValor[cambioRestante][monedaActual] = nuevoValor;
-						matrizRuta[cambioRestante][monedaActual] = p;
+				int max = cambioRestante / monedas[moneda];
+				for (int meto = 0; meto <= max; meto++) {
+					int nuevoCambio = matrizBackward(cambioRestante - monedas[moneda] * meto, moneda + 1)
+							+ monedas[moneda] * meto;
+					int nuevasMonedas = matrizMonedas[cambioRestante - monedas[moneda] * meto][moneda + 1] + meto;
+					if (nuevoCambio <= cambio) {
+						if (nuevoCambio > matrizCambio[cambioRestante][moneda]
+								|| (nuevoCambio == matrizCambio[cambioRestante][moneda]
+										&& nuevasMonedas < matrizMonedas[cambioRestante][moneda])) {
+							matrizRuta[cambioRestante][moneda] = meto;
+							matrizMonedas[cambioRestante][moneda] = nuevasMonedas;
+							matrizCambio[cambioRestante][moneda] = nuevoCambio;
+						}
 					}
 				}
 			}
 		}
-		return matrizValor[cambioRestante][monedaActual];
-	}
-
-	public boolean esMejor(int cambioRestante, int monedaActual, int nuevoRestante, int nuevoValor) {
-		int viejoRestante = cambioRestante - matrizRuta[cambioRestante][monedaActual] * monedas[monedaActual];
-		if(viejoRestante > nuevoRestante) {
-			return true;
-		}
-		else if(viejoRestante == nuevoRestante && nuevoValor < matrizValor[cambioRestante][monedaActual]) {
-			return true;
-		}
-		return false;
+		return matrizCambio[cambioRestante][moneda];
 	}
 }

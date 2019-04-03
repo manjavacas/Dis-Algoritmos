@@ -66,14 +66,14 @@ public class CambioMonedas {
 	}
 
 	private static void forwardMatrices(int cambio, int[] monedas) {
-		MatricesForwardPrueba fm = new MatricesForwardPrueba(cambio, monedas);
-		int[][] sol = fm.resolver();
+		MatricesForward fm = new MatricesForward(cambio, monedas);
+		int[] sol = fm.resolver();
 		System.out.println("\n\n****************** FORWARD MATRICES ******************");
 		imprimir(sol, monedas);
 	}
 
 	private static void backwardMatrices(int cambio, int[] monedas) {
-		MatricesBackwardPrueba bm = new MatricesBackwardPrueba(cambio, monedas);
+		MatricesBackward bm = new MatricesBackward(cambio, monedas);
 		int[] sol = bm.resolver(cambio);
 		System.out.println("\n\n****************** BACKWARD MATRICES ******************");
 		imprimir(sol, monedas);
@@ -82,21 +82,6 @@ public class CambioMonedas {
 	private static void imprimir(int[] sol, int[] monedas) {
 		for (int i = 0; i < sol.length; i++) {
 			System.out.println("\tPoner " + sol[i] + " monedas con valor " + monedas[i]);
-		}
-	}
-
-	private static void imprimir(int[][] sol, int[] monedas) {
-		int fila = 0;
-		for(int i = 0; i < sol.length; i++) {
-			if(sol[i][0] != -1) {
-				fila = i;
-				break;
-			}
-		}
-
-		for (int col = sol[0].length - 1; col >= 0; col--) {
-			System.out.println("\tPoner " + sol[fila][col] + " monedas con valor " + monedas[col]);
-			fila = fila + sol[fila][col] * monedas[col];
 		}
 	}
 }
