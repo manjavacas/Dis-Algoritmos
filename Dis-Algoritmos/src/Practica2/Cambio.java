@@ -1,5 +1,11 @@
 package Practica2;
 
+/*
+ * Clase Cambio que se utiliza para crear instancias de dicha clase, la cual se utilizara para representar un elemento de la lista
+ * y en la cual se almacenará la etapa en la cual nos encontramos (monedaActual de la cual estamos comprobando cuantas podemos meter),
+ * el cambio restante (cambio que nos queda por devolver con las monedas que llevamos), el numero de monedas que pongo de la moneda actual,
+ * el numero de monedas que llevo acumuladas, el valor del cambio acumulado que llevamos actualmente y una referencia a un objeto Cambio del cual vengo
+ */
 public class Cambio {
 
 	private int etapa;
@@ -9,22 +15,7 @@ public class Cambio {
 	private int valor;
 	private Cambio vieneDe;
 
-	public Cambio(int etapa) {
-		this.etapa = etapa;
-		this.restante = 0;
-		this.pongo = 0;
-		this.numMonedas = 0;
-		this.vieneDe = null;
-	}
-
-	public Cambio(int etapa, int restante, int pongo, int numMonedas, Cambio vieneDe) {
-		this.etapa = etapa;
-		this.restante = restante;
-		this.pongo = pongo;
-		this.numMonedas = numMonedas;
-		this.vieneDe = vieneDe;
-	}
-
+	//Constructor
 	public Cambio(int etapa, int restante, int pongo, int numMonedas, int valor, Cambio vieneDe) {
 		this.etapa = etapa;
 		this.restante = restante;
@@ -34,6 +25,7 @@ public class Cambio {
 		this.vieneDe = vieneDe;
 	}
 
+	//Getters y setters
 	public int getEtapa() {
 		return etapa;
 	}
@@ -82,18 +74,21 @@ public class Cambio {
 		this.vieneDe = vieneDe;
 	}
 
+	/*
+	 * Metodo equals, dos cambios representaran el mismo cambio si la etapa en la cual nos encontramos, el cambio restante y el numero de
+	 * monedas actuales que pongo en el momento actual son iguales
+	 */
 	@Override
 	public boolean equals(Object c) {
 		return c instanceof Cambio && getEtapa() == ((Cambio) c).getEtapa()
 				&& getRestante() == ((Cambio) c).getRestante() && getPongo() == ((Cambio) c).getPongo();
 	}
 
+	//Metodo que devuelve una cadena del objeto
 	@Override
 	public String toString() {
 		return "Cambio [etapa=" + etapa + ", restante=" + restante + ", pongo=" + pongo + ", numMonedas=" + numMonedas
 				+ ", vieneDe=" + vieneDe + "]";
 	}
-
-
 
 }
