@@ -37,7 +37,7 @@ public class MatricesForwardPrueba {
 				int max = restante / monedas[monedaActual];
 				for (int p = 0; p <= max; p++) {
 					int nuevoRestante = restante - monedas[monedaActual] * p;
-					if (matrizValor[nuevoRestante][monedaActual] > matrizValor[restante][monedaActual - 1] + p) {
+					if (matrizValor[nuevoRestante][monedaActual] >= matrizValor[restante][monedaActual - 1] + p) {
 						matrizValor[nuevoRestante][monedaActual] = matrizValor[restante][monedaActual - 1] + p;
 						matrizRuta[nuevoRestante][monedaActual] = p;
 					}

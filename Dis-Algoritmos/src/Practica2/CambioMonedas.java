@@ -22,6 +22,7 @@ public class CambioMonedas {
 		forward(cambio, monedas);
 		backward(cambio, monedas);
 		forwardMatrices(cambio, monedas);
+		backwardMatrices(cambio, monedas);
 	}
 
 	private static void forward(int cambio, int[] monedas) {
@@ -68,6 +69,13 @@ public class CambioMonedas {
 		MatricesForwardPrueba fm = new MatricesForwardPrueba(cambio, monedas);
 		int[][] sol = fm.resolver();
 		System.out.println("\n\n****************** FORWARD MATRICES ******************");
+		imprimir(sol, monedas);
+	}
+
+	private static void backwardMatrices(int cambio, int[] monedas) {
+		MatricesBackwardPrueba bm = new MatricesBackwardPrueba(cambio, monedas);
+		int[] sol = bm.resolver(cambio);
+		System.out.println("\n\n****************** BACKWARD MATRICES ******************");
 		imprimir(sol, monedas);
 	}
 
