@@ -1,5 +1,9 @@
 package Practica2;
 
+/*
+ * Clase que lleva a cabo la resolucion del cambio de monedas mediante programacion dinamica con matrices mediante el metodo backward
+ */
+
 public class MatricesBackward {
 
 	private int cambio;
@@ -20,7 +24,7 @@ public class MatricesBackward {
 		inicializar();
 	}
 
-	public void inicializar() {
+	private void inicializar() {
 
 		for (int i = 0; i < matrizCambio.length; i++) {
 			for (int j = 0; j < numMonedas; j++) {
@@ -44,7 +48,7 @@ public class MatricesBackward {
 		return solucion;
 	}
 
-	public int matrizBackward(int cambioRestante, int moneda) {
+	private int matrizBackward(int cambioRestante, int moneda) {
 
 		if (matrizRuta[cambioRestante][moneda] == 0) {
 			if (moneda == numMonedas - 1) {

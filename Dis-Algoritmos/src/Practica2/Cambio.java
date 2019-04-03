@@ -6,6 +6,7 @@ package Practica2;
  * el cambio restante (cambio que nos queda por devolver con las monedas que llevamos), el numero de monedas que pongo de la moneda actual,
  * el numero de monedas que llevo acumuladas, el valor del cambio acumulado que llevamos actualmente y una referencia a un objeto Cambio del cual vengo
  */
+
 public class Cambio {
 
 	private int etapa;
