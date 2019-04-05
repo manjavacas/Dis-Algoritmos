@@ -1,5 +1,12 @@
 package Practica1;
 
+/**
+ * Numero combinatorio: factorial, iterativo, pilas
+ * 
+ * @author Antonio.Manjavacas, Ruben.Marquez
+ *         
+ **/
+
 import java.util.Stack;
 
 public class NumeroCombinatorio {
@@ -11,7 +18,6 @@ public class NumeroCombinatorio {
 		this.k = k;
 	}
 
-	// Calcular factorial de un numero
 	private int factorial(int n) {
 		if (n == 0) {
 			return 1;
@@ -20,17 +26,16 @@ public class NumeroCombinatorio {
 		}
 	}
 
-	// Calcular numero combinatorio de forma iterativa
+	/************ Combinatorio iterativo ************/
 	public int combinatorioIterativo() {
 		return factorial(n) / (factorial(k) * factorial(n - k));
 	}
 
-	// Calcular numero combinatorio de forma recursiva
+	/************ Combinatorio recursivo ************/
 	public int combinatorioRecursivo() {
 		return combinatorioRecursivo(n, k);
 	}
 
-	// Recursion del numero combinatorio
 	public int combinatorioRecursivo(int n, int k) {
 		if (k == 0) {
 			return 1;
@@ -41,7 +46,7 @@ public class NumeroCombinatorio {
 		}
 	}
 
-	// Calcular numero combinatorio mediante pilas
+	/************ Combinatorio con pilas ************/
 	public int combinatorioPilas() {
 		Stack<Integer> pilaN = new Stack<Integer>();
 		Stack<Integer> pilaK = new Stack<Integer>();
@@ -53,7 +58,10 @@ public class NumeroCombinatorio {
 		pilaL.push(1);
 		pilaSol.push(0);
 
-		return combinatorioPilas(pilaN, pilaK, pilaL, pilaSol);
+		if (k == 0)
+			return 1;
+		else
+			return combinatorioPilas(pilaN, pilaK, pilaL, pilaSol);
 	}
 
 	private int combinatorioPilas(Stack<Integer> pilaN, Stack<Integer> pilaK, Stack<Integer> pilaL,

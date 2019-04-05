@@ -3,12 +3,10 @@ package Practica1;
 import java.util.Scanner;
 
 /**
- * @author Antonio Manjavacas, Ruben Marquez
- *
- *         CALCULAR NUMERO COMBINATORIO
- *
- *         Calcular el numero combinatorio C(n,k).
- *
+ * Calcular numero combinatorio C(n,k)
+ * 
+ * @author Antonio.Manjavacas, Ruben.Marquez
+ *         
  **/
 
 /**
@@ -21,10 +19,10 @@ import java.util.Scanner;
  * 			| T(n) = T(n-1) + 1, si n > 1
  * 		Por expansion de recurrencia:
  * 			| T(n) = 1 + T(n-1) = 1 + 1 + T(n-2) = ... = k + T(n-k) si n > k
- * 		Para k = n - 1 tenemos:
+ * 		Para k = n-1 tenemos:
  * 			| T(n) = n-1 + T(n-n+1) = n-1 + T(1) = n
  * 		Por tanto:
- * 			| T(n,k) = T(n) + T(k) + T(n-k) + c <=> 3*T(n) + c = 3n + c € O(n)
+ * 			| T(n,k) = T(n) + T(k) + T(n-k) + c <=> 3*T(n) + c = 3n + c --> O(n)
  *
  * ********************************* COMBINATORIO RECURSIVO ********************************
  *
@@ -34,15 +32,15 @@ import java.util.Scanner;
  * 		Por expansion de recurrencia:
  * 			| T(n) = 2 * T(n-1) + 1 = 2 * (2*T(n-2) + 1) + 1 = ... = 2^k * T(n-k) + (2^k-1)
  * 		Para k = n - 1 tenemos:
- * 			| T(n) = 2^(n-1) * T(1) + 2^(n-1) - 1 € O(2^n)
+ * 			| T(n) = 2^(n-1) * T(1) + 2^(n-1) - 1 --> O(2^n)
  *
  * ********************************* COMBINATORIO CON PILAS ********************************
  *
- * 		Se estima una complejidad completamente intratable.
+ * 		Completamente intratable.
  *
  * **/
 
-public class Practica1 {
+public class CalcularCombinatorio {
 
 	static Scanner leer = new Scanner(System.in);
 

@@ -2,6 +2,12 @@ package Practica2;
 
 import java.util.Arrays;
 
+/**
+ * Cambio de monedas // Dis. Algoritmos // Curso 2018/2019
+ * 
+ * @author Ruben.Marquez, Antonio.Manjavacas
+ */
+
 public class CambioMonedas {
 
 	public static void main(String[] args) {
@@ -16,6 +22,7 @@ public class CambioMonedas {
 			monedas[i] = Integer.parseInt(tokens[i]);
 		}
 
+		// Para mostrar todas las soluciones en el mismo orden
 		Arrays.sort(monedas);
 
 		// Calcular cambio
@@ -25,18 +32,18 @@ public class CambioMonedas {
 		backwardMatrices(cambio, monedas);
 	}
 
+	/********************* Version forward *********************/
 	private static void forward(int cambio, int[] monedas) {
 		Forward f = new Forward(cambio, monedas);
 		Cambio solucion = f.resolver();
 		int[] sol = solucionForward(solucion, monedas);
-		System.out.println("****************** FORWARD ******************");
+		System.out.println("\t----------- FORWARD -----------\n");
 		imprimir(sol, monedas);
 	}
 
 	private static int[] solucionForward(Cambio solucion, int[] monedas) {
 		Cambio cambio = solucion;
 		int[] sol = new int[monedas.length];
-
 		for (int i = sol.length - 1; i >= 0; i--) {
 			sol[i] = cambio.getPongo();
 			cambio = cambio.getVieneDe();
@@ -45,11 +52,12 @@ public class CambioMonedas {
 		return sol;
 	}
 
+	/********************* Version backward *********************/
 	private static void backward(int cambio, int[] monedas) {
 		Backward b = new Backward(cambio, monedas);
 		Cambio solucion = b.resolver();
 		int[] sol = solucionBackward(solucion, monedas);
-		System.out.println("\n\n****************** BACKWARD ******************");
+		System.out.println("\n\n\t----------- BACKWARD -----------\n");
 		imprimir(sol, monedas);
 	}
 
@@ -65,17 +73,19 @@ public class CambioMonedas {
 		return sol;
 	}
 
+	/********************* Version forward matrices *********************/
 	private static void forwardMatrices(int cambio, int[] monedas) {
 		MatricesForward fm = new MatricesForward(cambio, monedas);
 		int[] sol = fm.resolver();
-		System.out.println("\n\n****************** FORWARD MATRICES ******************");
+		System.out.println("\n\n\t------ FORWARD MATRICES ------\n");
 		imprimir(sol, monedas);
 	}
 
+	/********************* Version backward matrices *********************/
 	private static void backwardMatrices(int cambio, int[] monedas) {
 		MatricesBackward bm = new MatricesBackward(cambio, monedas);
 		int[] sol = bm.resolver(cambio);
-		System.out.println("\n\n****************** BACKWARD MATRICES ******************");
+		System.out.println("\n\n\t------ BACKWARD MATRICES ------\n");
 		imprimir(sol, monedas);
 	}
 
