@@ -2,7 +2,7 @@ package Practica2;
 
 /**
  * Cambio de monedas backward con matrices
- * 
+ *
  * @author Ruben.Marquez, Antonio.Manjavacas
  */
 
