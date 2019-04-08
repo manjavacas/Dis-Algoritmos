@@ -1,10 +1,8 @@
 package Practica2;
 
-import java.util.Arrays;
-
 /**
  * Cambio de monedas // Dis. Algoritmos // Curso 2018/2019
- * 
+ *
  * @author Ruben.Marquez, Antonio.Manjavacas
  */
 
@@ -23,7 +21,7 @@ public class CambioMonedas {
 		}
 
 		// Para mostrar todas las soluciones en el mismo orden
-		Arrays.sort(monedas);
+		//Arrays.sort(monedas);
 
 		// Calcular cambio
 		forward(cambio, monedas);
