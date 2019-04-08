@@ -13,25 +13,25 @@ public class CalcularVolumen {
 
 		int radio = Leer.entero("Introducir radio de la base: ");
 		int altura = Leer.entero("Introducir altura del cono: ");
-
-		volumenValorMedio(radio, altura);
-		volumenProporciones(radio, altura);
-		volumenReal(radio, altura);
+		Cono cono = new Cono(radio, altura);
+		volumenValorMedio(cono);
+		volumenProporciones(cono);
+		volumenReal(cono);
 
 	}
 
-	private void volumenValorMedio(int radio, int altura) {
-		ValorMedio vm = new ValorMedio(radio, altura);
+	private void volumenValorMedio(Cono cono) {
+		ValorMedio vm = new ValorMedio(cono);
 		vm.calcular();
 	}
 
-	private void volumenProporciones(int radio, int altura) {
-		VolProporciones vp = new VolProporciones(radio, altura);
+	private void volumenProporciones(Cono cono) {
+		VolProporciones vp = new VolProporciones(cono);
 		vp.calcular();
 	}
 
-	private void volumenReal(int radio, int altura) {
-		VolumenReal vr = new VolumenReal(radio, altura);
+	private void volumenReal(Cono cono) {
+		VolumenReal vr = new VolumenReal(cono);
 		vr.calcular();
 	}
 

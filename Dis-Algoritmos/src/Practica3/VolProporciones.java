@@ -9,12 +9,10 @@ package Practica3;
 
 public class VolProporciones {
 
-	private int radio;
-	private int altura;
+	private Cono cono;
 
-	public VolProporciones(int radio, int altura) {
-		this.radio = radio;
-		this.altura = altura;
+	public VolProporciones(Cono cono) {
+		this.cono = cono;
 	}
 
 	public void calcular() {

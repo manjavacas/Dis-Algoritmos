@@ -9,12 +9,10 @@ package Practica3;
 
 public class VolumenReal {
 	
-	private int radio;
-	private int altura;
-
-	public VolumenReal(int radio, int altura) {
-		this.radio = radio;
-		this.altura = altura;
+	private Cono cono;
+	
+	public VolumenReal(Cono cono) {
+		this.cono = cono;
 	}
 
 	public void calcular() {
