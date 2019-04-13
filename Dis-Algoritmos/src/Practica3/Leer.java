@@ -74,4 +74,42 @@ public class Leer {
 		return cadena(cad).charAt(0);
 	}
 
+	/************ Extension ************/
+
+	public static double getDouble(String s) {
+		double res = 0;
+		boolean vale = true;
+		do {
+			vale = true;
+			p(s);
+			try {
+				res = TECLADO.nextDouble();
+				p(res + "");
+			} catch (Exception e) {
+				vale = false;
+				TECLADO.next();
+			}
+		} while (!vale);
+		TECLADO.nextLine();
+		return res;
+	}
+
+	public static long getLong(String s) {
+		long res = 0;
+		boolean vale = true;
+		do {
+			vale = true;
+			p(s);
+			try {
+				res = TECLADO.nextLong();
+				p(res + "");
+			} catch (Exception e) {
+				vale = false;
+				TECLADO.next();
+			}
+		} while (!vale);
+		TECLADO.nextLine();
+		return res;
+	}
+
 }
