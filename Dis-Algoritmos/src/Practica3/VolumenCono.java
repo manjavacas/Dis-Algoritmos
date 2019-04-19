@@ -1,7 +1,7 @@
 package Practica3;
 
 /**
- * Calcular volumen cono
+ * Calcula volumen cono por valor medio y proporciones
  * 
  * @author Antonio.Manjavacas, Ruben.Marquez
  *
@@ -52,11 +52,11 @@ public class VolumenCono {
 	public double[] getIntervaloP() {
 		return this.intervaloP;
 	}
-	
+
 	public double getProporcion() {
 		return this.proporcion;
 	}
-	
+
 	public double calcularValorMedio(long puntos) {
 
 		return 0; // xxxxx
