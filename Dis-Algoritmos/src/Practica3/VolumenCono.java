@@ -9,17 +9,21 @@ package Practica3;
 
 public class VolumenCono {
 
+	private static final double ESTADISTICO = 1.96;
+
 	private Cono cono;
+	private int puntos;
 
 	// Volumen proporciones
 	private double proporcion;
 	private double[] intervaloP;
 
-	public VolumenCono(Cono cono) {
+	public VolumenCono(Cono cono, int puntos) {
 		this.cono = cono;
+		this.puntos = puntos;
 	}
 
-	public double calcularProporciones(long puntos) {
+	public double calcularProporciones() {
 		double h = cono.getAltura();
 		double r = cono.getRadio();
 		double x0, y0, z0, z;
@@ -38,15 +42,15 @@ public class VolumenCono {
 			}
 		}
 
-		intervaloProp((double) dentro / puntos, puntos);
+		intervaloProp((double) dentro / puntos);
 		return (double) dentro / puntos * (Math.PI * Math.pow(r, 2) * h);
 	}
 
-	private void intervaloProp(double p, long puntos) {
+	private void intervaloProp(double p) {
 		proporcion = p;
 		intervaloP = new double[2];
-		intervaloP[0] = p - 1.96 * Math.sqrt(p * (1 - p) / puntos);
-		intervaloP[1] = p + 1.96 * Math.sqrt(p * (1 - p) / puntos);
+		intervaloP[0] = p - ESTADISTICO * Math.sqrt(p * (1 - p) / puntos);
+		intervaloP[1] = p + ESTADISTICO * Math.sqrt(p * (1 - p) / puntos);
 	}
 
 	public double[] getIntervaloP() {
@@ -57,9 +61,11 @@ public class VolumenCono {
 		return this.proporcion;
 	}
 
-	public double calcularValorMedio(long puntos) {
+	public double calcularValorMedio() {
+		
+		// xxxxxxx
 
-		return 0; // xxxxx
+		return 0;
 	}
 
 	public double calcularReal() {
