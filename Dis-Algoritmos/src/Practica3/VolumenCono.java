@@ -18,12 +18,16 @@ public class VolumenCono {
 	private double proporcion;
 	private double[] intervaloP;
 
+	// Volumen valor medio
+	private double[] intervaloVM;
+
 	public VolumenCono(Cono cono, int puntos) {
 		this.cono = cono;
 		this.puntos = puntos;
 	}
 
 	public double calcularProporciones() {
+
 		double h = cono.getAltura();
 		double r = cono.getRadio();
 		double x0, y0, z0, z;
@@ -62,10 +66,55 @@ public class VolumenCono {
 	}
 
 	public double calcularValorMedio() {
-		
-		// xxxxxxx
 
-		return 0;
+		double[] valores = new double[puntos];
+		double suma = 0.0;
+		double r = cono.getRadio();
+		double h = cono.getAltura();
+		double x, y, z;
+
+		for (int i = 0; i < puntos; i++) {
+
+			x = Math.random() * r;
+			y = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
+			z = Math.random() * h;
+
+			//////////// CORREGIR ////////////
+			valores[i] = r * y * z;
+			suma = suma + valores[i];
+		}
+
+		intervaloValorMedio(valores);
+
+		return suma / puntos;
+	}
+
+	public void intervaloValorMedio(double[] valores) {
+		double media = media(valores);
+		double cuasiVar = cuasiVar(valores, media);
+		intervaloVM = new double[2];
+		intervaloVM[0] = media - ESTADISTICO * cuasiVar / Math.sqrt(valores.length);
+		intervaloVM[1] = media + ESTADISTICO * cuasiVar / Math.sqrt(valores.length);
+	}
+
+	public double media(double valores[]) {
+		double media = 0;
+		for (int i = 0; i < valores.length; i++) {
+			media = media + valores[i];
+		}
+		return media / valores.length;
+	}
+
+	public double cuasiVar(double[] valores, double media) {
+		double s = 0;
+		for (int i = 0; i < valores.length; i++) {
+			s = s + Math.pow(valores[i] - media, 2);
+		}
+		return Math.sqrt(s / (valores.length - 1));
+	}
+
+	public double[] getIntervaloVM() {
+		return this.intervaloVM;
 	}
 
 	public double calcularReal() {

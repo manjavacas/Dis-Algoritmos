@@ -23,9 +23,9 @@ public class CalcularVolumen {
 		VolumenCono vc = new VolumenCono(cono, puntos);
 		System.out.println("\t* Volumen por proporciones = " + vc.calcularProporciones() + "\n\t\t - Proporcion = "
 				+ vc.getProporcion() + "\n\t\t - Intervalo = [" + vc.getIntervaloP()[0] + ", " + vc.getIntervaloP()[1]
-				+ "]");
-		System.out.println("\t* Volumen por valor medio = " + vc.calcularValorMedio());
-		System.out.println("\t* Volumen real = " + vc.calcularReal());
+				+ "]\n\t* Volumen por proporciones = " + vc.calcularValorMedio() + "\n\t\t - Intervalo = ["
+				+ vc.getIntervaloVM()[0] + ", " + vc.getIntervaloVM()[1] + "]\n\t* Volumen real = "
+				+ vc.calcularReal());
 	}
 
 }
