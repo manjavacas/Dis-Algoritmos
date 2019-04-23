@@ -2,7 +2,7 @@ package Practica3;
 
 /**
  * Calcula volumen cono por valor medio y proporciones
- * 
+ *
  * @author Antonio.Manjavacas, Ruben.Marquez
  *
  */
@@ -77,10 +77,10 @@ public class VolumenCono {
 
 			x = Math.random() * r;
 			y = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
-			z = Math.random() * h;
 
-			//////////// CORREGIR ////////////
-			valores[i] = r * y * z;
+			z = h - h * Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / r;
+
+			valores[i] = Math.PI * Math.pow(r, 2) * z; //Volumen del cilindro
 			suma = suma + valores[i];
 		}
 
