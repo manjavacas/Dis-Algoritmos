@@ -13,10 +13,12 @@ public class Busquedas {
 
 	private String patron;
 	private File f;
+	private int porcentaje;
 
-	public Busquedas(String patron, File f) {
+	public Busquedas(String patron, File f, int porcentaje) {
 		this.patron = patron;
 		this.f = f;
+		this.porcentaje = porcentaje;
 	}
 
 	public int naive() {

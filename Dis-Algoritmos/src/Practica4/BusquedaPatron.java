@@ -18,14 +18,15 @@ public class BusquedaPatron {
 		// String file = Leer.cadena("Introducir ubicacion del fichero: ");
 		File f = new File(FICHERO);
 		System.out.println("* Introducido fichero " + f.getName() + " de longitud = " + f.length());
-		
+
 		String patron = Leer.cadena("* Introducir cadena a buscar en el texto: ");
-		
-		medirTiempos(patron, f);
+		int porcentaje = Leer.entero("* Introducir porcentaje de texto a procesar: ");
+
+		medirTiempos(patron, f, porcentaje);
 	}
 
-	private static void medirTiempos(String patron, File f) {
-		Busquedas b = new Busquedas(patron, f);
+	private static void medirTiempos(String patron, File f, int porcentaje) {
+		Busquedas b = new Busquedas(patron, f, porcentaje);
 
 		int ocurrencias = -1;
 		long t0, t1;
@@ -34,19 +35,22 @@ public class BusquedaPatron {
 		t0 = System.nanoTime();
 		ocurrencias = b.naive();
 		t1 = System.nanoTime();
-		System.out.println("\n[NAIVE] " + ocurrencias + " ocurrencias. Ejecutado en " + (t1 - t0) + " ns");
+		System.out.println("\n[NAIVE] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 		// Karp-Rabin
 		t0 = System.nanoTime();
 		ocurrencias = b.karpRabin();
 		t1 = System.nanoTime();
-		System.out.println("\n[KARP-RABIN] " + ocurrencias + " ocurrencias. Ejecutado en " + (t1 - t0) + " ns");
+		System.out.println("\n[KARP-RABIN] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 		// Shift-Or
 		t0 = System.nanoTime();
 		ocurrencias = b.shiftOr();
 		t1 = System.nanoTime();
-		System.out.println("\n[SHIFT-OR] " + ocurrencias + " ocurrencias. Ejecutado en " + (t1 - t0) + " ns");
+		System.out.println("\n[SHIFT-OR] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 	}
 
