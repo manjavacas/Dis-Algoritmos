@@ -1,5 +1,7 @@
 package Practica4;
 
+import java.io.File;
+
 /**
  * Busqueda de patrones en texto
  * 
@@ -9,14 +11,21 @@ package Practica4;
 
 public class BusquedaPatron {
 
+	private static final String FICHERO = "src/Practica4/quijote1.txt";
+
 	public static void main(String[] args) {
 
-		String patron = Leer.cadena("Introducir cadena a buscar en el texto: ");
-		medirTiempos(patron);
+		// String file = Leer.cadena("Introducir ubicacion del fichero: ");
+		File f = new File(FICHERO);
+		System.out.println("* Introducido fichero " + f.getName() + " de longitud = " + f.length());
+		
+		String patron = Leer.cadena("* Introducir cadena a buscar en el texto: ");
+		
+		medirTiempos(patron, f);
 	}
 
-	private static void medirTiempos(String patron) {
-		Busquedas b = new Busquedas(patron);
+	private static void medirTiempos(String patron, File f) {
+		Busquedas b = new Busquedas(patron, f);
 
 		int ocurrencias = -1;
 		long t0, t1;
