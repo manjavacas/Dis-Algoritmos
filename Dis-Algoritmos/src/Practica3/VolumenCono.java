@@ -77,10 +77,10 @@ public class VolumenCono {
 
 			x = Math.random() * r;
 			y = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
-
+			
 			z = h - h * Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / r;
 
-			valores[i] = Math.PI * Math.pow(r, 2) * z; //Volumen del cilindro
+			valores[i] = Math.PI * Math.pow(r, 2) * z; // Volumen del cilindro
 			suma = suma + valores[i];
 		}
 
