@@ -51,10 +51,12 @@ public class VolumenCono {
 	}
 
 	private void intervaloProp(double p) {
+		double r = cono.getRadio();
+		double h = cono.getAltura();
 		proporcion = p;
 		intervaloP = new double[2];
-		intervaloP[0] = p - ESTADISTICO * Math.sqrt(p * (1 - p) / puntos);
-		intervaloP[1] = p + ESTADISTICO * Math.sqrt(p * (1 - p) / puntos);
+		intervaloP[0] = (p - ESTADISTICO * Math.sqrt(p * (1 - p) / puntos)) * (Math.PI * Math.pow(r, 2) * h);
+		intervaloP[1] = (p + ESTADISTICO * Math.sqrt(p * (1 - p) / puntos)) * (Math.PI * Math.pow(r, 2) * h);
 	}
 
 	public double[] getIntervaloP() {
@@ -77,7 +79,7 @@ public class VolumenCono {
 
 			x = Math.random() * r;
 			y = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
-			
+
 			z = h - h * Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / r;
 
 			valores[i] = Math.PI * Math.pow(r, 2) * z; // Volumen del cilindro
