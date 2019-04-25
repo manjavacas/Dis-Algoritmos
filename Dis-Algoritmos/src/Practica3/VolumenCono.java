@@ -47,7 +47,7 @@ public class VolumenCono {
 		}
 
 		intervaloProp((double) dentro / puntos);
-		return (double) dentro / puntos * (Math.PI * Math.pow(r, 2) * h);
+		return ((double) dentro) / puntos * (Math.PI * Math.pow(r, 2) * h);
 	}
 
 	private void intervaloProp(double p) {
