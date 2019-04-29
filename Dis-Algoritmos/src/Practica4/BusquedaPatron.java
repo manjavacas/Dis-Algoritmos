@@ -26,8 +26,13 @@ public class BusquedaPatron {
 	}
 
 	private static void medirTiempos(String patron, File f, int porcentaje) {
-		Busquedas b = new Busquedas(patron, f, porcentaje);
 
+		// Extraer texto a procesar
+		ProcesadorTexto pt = new ProcesadorTexto(f, porcentaje);
+		String texto = pt.procesar();
+
+		// Busqueda
+		Busquedas b = new Busquedas(patron, texto);
 		int ocurrencias = -1;
 		long t0, t1;
 

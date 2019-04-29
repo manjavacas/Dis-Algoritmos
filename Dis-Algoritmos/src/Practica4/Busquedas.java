@@ -1,6 +1,9 @@
 package Practica4;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Metodos de busqueda: Naive, Karp-Rabin, Shift-OR
@@ -12,13 +15,11 @@ import java.io.File;
 public class Busquedas {
 
 	private String patron;
-	private File f;
-	private int porcentaje;
+	private String texto;
 
-	public Busquedas(String patron, File f, int porcentaje) {
+	public Busquedas(String patron, String texto) {
 		this.patron = patron;
-		this.f = f;
-		this.porcentaje = porcentaje;
+		this.texto = texto;
 	}
 
 	public int naive() {
