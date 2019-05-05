@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * Busqueda de patrones en texto
- * 
+ *
  * @author Antonio.Manjavacas, Ruben.Marquez
  *
  */
@@ -30,31 +30,34 @@ public class BusquedaPatron {
 		// Extraer texto a procesar
 		ProcesadorTexto pt = new ProcesadorTexto(f, porcentaje);
 		String texto = pt.procesar();
+		System.out.println(texto);
 
 		// Busqueda
 		Busquedas b = new Busquedas(patron, texto);
 		int ocurrencias = -1;
 		long t0, t1;
 
+		int incremento = (int) (1 / ((double) porcentaje / 100));
+
 		// Naive (fuerza bruta)
 		t0 = System.nanoTime();
 		ocurrencias = b.naive();
 		t1 = System.nanoTime();
-		System.out.println("\n[NAIVE] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+		System.out.println("\n[NAIVE] " + ocurrencias * incremento + " ocurrencias. Procesado " + porcentaje
 				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 		// Karp-Rabin
 		t0 = System.nanoTime();
 		ocurrencias = b.karpRabin();
 		t1 = System.nanoTime();
-		System.out.println("\n[KARP-RABIN] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+		System.out.println("\n[KARP-RABIN] " + ocurrencias * incremento + " ocurrencias. Procesado " + porcentaje
 				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 		// Shift-Or
 		t0 = System.nanoTime();
 		ocurrencias = b.shiftOr();
 		t1 = System.nanoTime();
-		System.out.println("\n[SHIFT-OR] " + ocurrencias + " ocurrencias. Procesado " + porcentaje
+		System.out.println("\n[SHIFT-OR] " + ocurrencias * incremento + " ocurrencias. Procesado " + porcentaje
 				+ "% del texto. Ejecutado en " + (t1 - t0) + " ns");
 
 	}
