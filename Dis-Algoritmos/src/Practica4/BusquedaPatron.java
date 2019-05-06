@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Busqueda de patrones en texto
  *
- * @author Antonio.Manjavacas, Ruben.Marquez
+ * @author Ruben.Marquez, Antonio.Manjavacas
  *
  */
 

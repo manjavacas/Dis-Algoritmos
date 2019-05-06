@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Metodos de busqueda: Naive, Karp-Rabin, Shift-OR
  *
- * @author Antonio.Manjavacas, Ruben.Marquez
+ * @author Ruben.Marquez, Antonio.Manjavacas
  *
  */
 

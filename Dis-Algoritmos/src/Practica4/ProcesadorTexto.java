@@ -6,6 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Procesar porcentaje de texto
+ *
+ * @author Ruben.Marquez, Antonio.Manjavacas
+ *
+ */
+
 public class ProcesadorTexto {
 
 	private File f;
