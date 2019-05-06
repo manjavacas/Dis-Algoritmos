@@ -30,7 +30,7 @@ public class BusquedaPatron {
 		// Extraer texto a procesar
 		ProcesadorTexto pt = new ProcesadorTexto(f, porcentaje);
 		String texto = pt.procesar();
-		System.out.println(texto);
+		System.out.println("\n* Texto a procesar:" + texto + "\n* Patron: " + patron);
 
 		// Busqueda
 		Busquedas b = new Busquedas(patron, texto);
