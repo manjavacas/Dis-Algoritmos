@@ -28,18 +28,16 @@ public class ProcesadorTexto {
 
 			String linea;
 			while ((linea = br.readLine()) != null) {
-				if((cont % lineas) == 0)
-					texto += linea;
+				if ((cont % lineas) == 0)
+					texto += " " + linea;
 				cont++;
 			}
 
 			return texto;
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

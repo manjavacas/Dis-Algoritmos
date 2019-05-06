@@ -21,15 +21,15 @@ public class Busquedas {
 
 	public int naive() {
 		int ocurrencias = 0;
-		// ArrayList<Integer> ocurrencias = new ArrayList<Integer>();// posicion de las
-		// coincidencias
+
+		// ArrayList<Integer> ocurrencias = new ArrayList<Integer>();
 
 		if (patron.length() > 0 && texto.length() >= patron.length()) {
-			int t = 0;// desplazamiento en el texto
-			int p = 0;// desplazamiento en el patron
+			int t = 0; // desplazamiento en el texto
+			int p = 0; // desplazamiento en el patron
 
 			while (texto.length() - t >= patron.length()) {
-				if (texto.charAt(t) == patron.charAt(p)) {// busqueda
+				if (texto.charAt(t) == patron.charAt(p)) { // busqueda
 					int T = t + 1;
 					int P = 1;
 
@@ -77,8 +77,8 @@ public class Busquedas {
 			String patronInvertido = invertir();
 			ArrayList<Character> alfabeto = new ArrayList<Character>();
 			// guardada los caracteres para localizarlos en alfabetoPatron
-			ArrayList<int[]> alfabetoPatron = new ArrayList<int[]>();// lista de bits de caracteres
-			bitsPatron(patronInvertido, alfabeto, alfabetoPatron);// preproceso
+			ArrayList<int[]> alfabetoPatron = new ArrayList<int[]>(); // lista de bits de caracteres
+			bitsPatron(patronInvertido, alfabeto, alfabetoPatron); // preproceso
 			ocurrencias = ShiftOr(alfabeto, alfabetoPatron);
 		}
 
@@ -95,7 +95,7 @@ public class Busquedas {
 	}
 
 	private static void bitsPatron(String inv, ArrayList<Character> alfabeto, ArrayList<int[]> alfabetoPatron) {
-		// saca la lista de los bits de los caracteres. Preproceso
+		// extrae la lista de los bits de los caracteres. Preproceso
 		for (int n = 0; n < inv.length(); n++) {
 			if (!alfabeto.contains(inv.charAt(n))) {
 				alfabeto.add(inv.charAt(n));

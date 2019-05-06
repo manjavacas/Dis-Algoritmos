@@ -35,8 +35,11 @@ public class VolumenCono {
 
 		for (int i = 0; i < puntos; i++) {
 
-			x0 = Math.random() * r;
-			y0 = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x0, 2));
+			do {
+				x0 = Math.random() * r;
+				y0 = Math.random() * r;
+			} while (Math.pow(x0, 2) + Math.pow(y0, 2) > Math.pow(r, 2));
+
 			z0 = Math.random() * h;
 
 			z = h - h * Math.sqrt(Math.pow(x0, 2) + Math.pow(y0, 2)) / r;
@@ -47,7 +50,7 @@ public class VolumenCono {
 		}
 
 		intervaloProp((double) dentro / puntos);
-		return ((double) dentro) / puntos * (Math.PI * Math.pow(r, 2) * h);
+		return ((double) dentro / puntos) * (Math.PI * Math.pow(r, 2) * h);
 	}
 
 	private void intervaloProp(double p) {
@@ -77,13 +80,15 @@ public class VolumenCono {
 
 		for (int i = 0; i < puntos; i++) {
 
-			x = Math.random() * r;
-			y = Math.random() * Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
+			do {
+				x = Math.random() * r;
+				y = Math.random() * r;
+			} while (Math.pow(x, 2) + Math.pow(y, 2) > Math.pow(r, 2));
 
 			z = h - h * Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / r;
 
 			valores[i] = Math.PI * Math.pow(r, 2) * z; // Volumen del cilindro
-			suma = suma + valores[i];
+			suma += valores[i];
 		}
 
 		intervaloValorMedio(valores);
