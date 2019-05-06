@@ -36,7 +36,7 @@ public class ProcesadorTexto {
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				if ((cont % lineas) == 0)
-					texto += " " + linea;
+					texto += linea;
 				cont++;
 			}
 
