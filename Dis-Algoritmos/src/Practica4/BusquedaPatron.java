@@ -27,7 +27,7 @@ public class BusquedaPatron {
 
 	private static void medirTiempos(String patron, File f, int porcentaje) {
 
-		// Extraer texto a procesar
+		// Extraer texto
 		ProcesadorTexto pt = new ProcesadorTexto(f, porcentaje);
 		String texto = pt.procesar();
 		System.out.println("\n* Texto a procesar:" + texto + "\n* Patron: " + patron);
